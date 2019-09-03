@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataSecurity.Lab1_1.Encoders;
 
 namespace DataSecurity.Lab1_1
 {
@@ -7,11 +8,13 @@ namespace DataSecurity.Lab1_1
     {
         private static List<IEncoder> _encoders = new List<IEncoder>
         {
+            new CaesarCipher(-1, "Caesar cipher")
         };
 
         static void Main(string[] args)
         {
-            string message = Console.ReadLine();
+            Console.Write("Enter the message: ");
+            string message = Console.ReadLine()?.ToUpper();
 
             foreach (var encoder in _encoders)
             {

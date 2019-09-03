@@ -6,7 +6,7 @@ namespace DataSecurity.Lab1_1
 {
     public interface IEncoder
     {
-        string EncoderName { get; set; }        
+        string EncoderName { get; }
         string Encrypt(string message);
     }
 }
