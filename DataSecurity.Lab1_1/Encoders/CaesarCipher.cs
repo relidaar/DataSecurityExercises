@@ -4,19 +4,13 @@ using System.Text;
 
 namespace DataSecurity.Lab1_1.Encoders
 {
-    class CaesarCipher : IEncoder
+    class CaesarCipher : BaseEncoder, IEncoder
     {
-        public string EncoderName { get; }
+        public string EncoderName => "Caesar cipher";
 
         private readonly int _key;
 
-        private const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        public CaesarCipher(int key, string encoderName)
-        {
-            _key = key;
-            EncoderName = encoderName;
-        }
+        public CaesarCipher(int key) => _key = key;
 
         public string Encrypt(string message)
         {
@@ -38,5 +32,7 @@ namespace DataSecurity.Lab1_1.Encoders
 
             return encryptedMessage;
         }
+
+        public void GenerateKey() { }
     }
 }

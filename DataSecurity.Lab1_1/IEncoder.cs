@@ -8,5 +8,6 @@ namespace DataSecurity.Lab1_1
     {
         string EncoderName { get; }
         string Encrypt(string message);
+        void GenerateKey();
     }
 }

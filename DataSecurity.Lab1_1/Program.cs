@@ -8,7 +8,8 @@ namespace DataSecurity.Lab1_1
     {
         private static List<IEncoder> _encoders = new List<IEncoder>
         {
-            new CaesarCipher(-1, "Caesar cipher")
+            new CaesarCipher(-1),
+            new SloganCipher("guitar hero")
         };
 
         static void Main(string[] args)
@@ -18,6 +19,7 @@ namespace DataSecurity.Lab1_1
 
             foreach (var encoder in _encoders)
             {
+                encoder.GenerateKey();
                 var encryptedMessage = encoder.Encrypt(message);
                 Console.WriteLine($"{encoder.EncoderName}: {encryptedMessage}");
             }
