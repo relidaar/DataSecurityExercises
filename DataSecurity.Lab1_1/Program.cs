@@ -10,7 +10,8 @@ namespace DataSecurity.Lab1_1
         {
             new CaesarCipher(-1),
             new SloganCipher("encrypt key"),
-            new PolybiusSquare()
+            new PolybiusSquare(),
+            new TrithemiusCipher()
         };
 
         static void Main(string[] args)

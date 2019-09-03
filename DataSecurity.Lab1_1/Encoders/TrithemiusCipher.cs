@@ -5,14 +5,14 @@ using System.Text;
 
 namespace DataSecurity.Lab1_1.Encoders
 {
-    class PolybiusSquare : BaseEncoder, IEncoder
+    class TrithemiusCipher : BaseEncoder, IEncoder
     {
-        public string EncoderName => "Polybius square";
+        public string EncoderName => "Trithemius cipher";
 
         private string _key;
         private readonly string _keyword;
 
-        public PolybiusSquare(string keyword = null) => _keyword = keyword;
+        public TrithemiusCipher(string keyword = null) => _keyword = keyword;
 
         public string Encrypt(string message)
         {
@@ -25,10 +25,13 @@ namespace DataSecurity.Lab1_1.Encoders
             {
                 if (!Alphabet.Contains(letter)) continue;
 
-                int column = _key.IndexOf(letter) % 5 + 1;
                 int row = _key.IndexOf(letter) / 5 + 1;
+                int column = _key.IndexOf(letter) % 5;
 
-                encryptedMessage += $"{row}{column} ";
+                if (row > 4) row = 0;
+
+                char newLetter = _key[row * 5 + column];
+                encryptedMessage += newLetter;
             }
 
             return encryptedMessage;
