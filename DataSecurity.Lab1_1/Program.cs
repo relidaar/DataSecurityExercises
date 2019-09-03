@@ -9,7 +9,8 @@ namespace DataSecurity.Lab1_1
         private static List<IEncoder> _encoders = new List<IEncoder>
         {
             new CaesarCipher(-1),
-            new SloganCipher("guitar hero")
+            new SloganCipher("encrypt key"),
+            new PolybiusSquare()
         };
 
         static void Main(string[] args)

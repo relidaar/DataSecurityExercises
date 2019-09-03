@@ -8,9 +8,9 @@ namespace DataSecurity.Lab1_1.Encoders
     {
         public string EncoderName => "Caesar cipher";
 
-        private readonly int _key;
+        private readonly int _shift;
 
-        public CaesarCipher(int key) => _key = key;
+        public CaesarCipher(int shift) => _shift = shift;
 
         public string Encrypt(string message)
         {
@@ -21,10 +21,9 @@ namespace DataSecurity.Lab1_1.Encoders
             {
                 if (!Alphabet.Contains(letter)) continue;
 
-                int position = Alphabet.IndexOf(letter) + _key;
+                int position = Alphabet.IndexOf(letter) + _shift;
 
                 if (position < 0) position += Alphabet.Length;
-
                 if (position > Alphabet.Length - 1) position -= Alphabet.Length;
 
                 encryptedMessage += Alphabet[position];
@@ -33,6 +32,6 @@ namespace DataSecurity.Lab1_1.Encoders
             return encryptedMessage;
         }
 
-        public void GenerateKey() { }
+        public void GenerateKey() {}
     }
 }
