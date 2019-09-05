@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataSecurity.Lab1_1.Encoders;
+using DataSecurity.Lab1_1.Encoders.Implementations;
+using DataSecurity.Lab1_1.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_1
 {
     class Program
     {
-        private static List<IEncoder> _encoders = new List<IEncoder>
+        private static readonly List<IEncoder> Encoders = new List<IEncoder>
         {
-            new CaesarCipher(-1),
-            new SloganCipher("encrypt key"),
+            new CaesarCipher(),
+            new SloganCipher(),
             new PolybiusSquare(),
-            new TrithemiusCipher()
+            new TrithemiusCipher(),
+            new VigenereCipher()
         };
 
         static void Main(string[] args)
@@ -19,11 +21,10 @@ namespace DataSecurity.Lab1_1
             Console.Write("Enter the message: ");
             string message = Console.ReadLine()?.ToUpper();
 
-            foreach (var encoder in _encoders)
+            foreach (var encoder in Encoders)
             {
-                encoder.GenerateKey();
-                var encryptedMessage = encoder.Encrypt(message);
-                Console.WriteLine($"{encoder.EncoderName}: {encryptedMessage}");
+                var result = encoder.Encrypt(message) ?? "Error";
+                Console.WriteLine($"{encoder.Name}: {result}");
             }
         }
     }
