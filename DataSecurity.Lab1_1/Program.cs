@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataSecurity.Lab1_1.Encoders;
 using DataSecurity.Lab1_1.Encoders.Implementations;
 using DataSecurity.Lab1_1.Encoders.Interfaces;
 
@@ -13,7 +14,8 @@ namespace DataSecurity.Lab1_1
             new SloganCipher(),
             new PolybiusSquare(),
             new TrithemiusCipher(),
-            new VigenereCipher()
+            new VigenereCipher(),
+            new PlayfairСipher()
         };
 
         static void Main(string[] args)

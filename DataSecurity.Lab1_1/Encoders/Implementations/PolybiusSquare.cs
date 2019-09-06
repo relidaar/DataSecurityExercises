@@ -21,7 +21,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             _keyword = string.Join(string.Empty, _keyword.ToCharArray().Distinct());
 
             string result = "";
-            string key = _keyword + string.Join("", Characters.Except(_keyword)).Replace("J", "I");
+            string key = _keyword + string.Join("", Characters.Except(_keyword)).Replace("J", "");
 
             foreach (var letter in message)
             {
