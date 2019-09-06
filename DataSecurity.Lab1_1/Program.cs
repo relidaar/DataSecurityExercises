@@ -18,7 +18,8 @@ namespace DataSecurity.Lab1_1
                 factory.UseTrithemiusCipher(),
                 factory.UsePolybiusSquare(),
                 factory.UseVigenereCipher(),
-                factory.UsePlayfairCipher()
+                factory.UsePlayfairCipher(),
+                factory.UseHomophonicCipher()
             };
 
             while (true)
