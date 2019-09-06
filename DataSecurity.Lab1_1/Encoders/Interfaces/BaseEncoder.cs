@@ -2,6 +2,6 @@
 {
     abstract class BaseEncoder
     {
-        public const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,-!?";
+        public const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 }
