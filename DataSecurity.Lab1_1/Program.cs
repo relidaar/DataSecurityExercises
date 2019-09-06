@@ -10,9 +10,6 @@ namespace DataSecurity.Lab1_1
     {
         static void Main(string[] args)
         {
-            Console.Write("Enter the message: ");
-            string message = Console.ReadLine()?.ToUpper();
-
             var factory = new EncoderFactory();
             var encoders = new List<IEncoder>
             {
@@ -24,10 +21,23 @@ namespace DataSecurity.Lab1_1
                 factory.UsePlayfairCipher()
             };
 
-            foreach (var encoder in encoders)
+            while (true)
             {
-                var result = encoder.Encrypt(message) ?? "Error";
-                Console.WriteLine($"{encoder.Name}: {result}");
+                Console.Clear();
+                Console.Write("Enter the message: ");
+                string message = Console.ReadLine()?.ToUpper();
+                Console.WriteLine();
+
+                foreach (var encoder in encoders)
+                {
+                    var result = encoder.Encrypt(message) ?? "Error";
+                    Console.WriteLine($"{encoder.Name}: {result}");
+                }
+
+                Console.Write("\nContinue? (y/n): ");
+                var input = Console.ReadLine();
+
+                if (input == "n") break;
             }
         }
     }

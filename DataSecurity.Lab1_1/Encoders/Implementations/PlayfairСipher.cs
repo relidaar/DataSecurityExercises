@@ -18,7 +18,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
         {
             if (message == null) return null;
 
-            message = message.ToUpper().Replace("J", "I");
+            message = message.ToUpper().Replace("J", "I").Replace(" ", "");
             _keyword = _keyword.ToUpper().Replace(" ", "");
             _keyword = string.Join(string.Empty, _keyword.ToCharArray().Distinct());
 

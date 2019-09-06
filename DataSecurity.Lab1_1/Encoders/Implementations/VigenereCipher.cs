@@ -15,7 +15,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             if (message == null) return null;
 
             _keyword = _keyword.ToUpper().Replace(" ", "");
-            message = message.ToUpper();
+            message = message.ToUpper().Replace(" ", "");
 
             string result = "";
             int keywordIndex = 0;

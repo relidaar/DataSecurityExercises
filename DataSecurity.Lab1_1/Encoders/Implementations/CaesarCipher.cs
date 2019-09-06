@@ -19,16 +19,14 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
             foreach (var symbol in message)
             {
-                int index = Characters.IndexOf(symbol) + _shift;
+                if (!Characters.Contains(symbol)) continue;
 
-                if (index > Characters.Length - 1) index -= Characters.Length;
+                int index = (Characters.IndexOf(symbol) + _shift) % Characters.Length;
 
                 result += Characters[index];
             }
 
             return result;
         }
-
-        public void GenerateKey() {}
     }
 }
