@@ -8,13 +8,13 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         private string _keyword;
 
-        public VigenereCipher(string keyword = "secret") => _keyword = keyword;
+        public VigenereCipher(string keyword) => _keyword = keyword;
 
         public string Encrypt(string message)
         {
             if (message == null) return null;
 
-            _keyword = _keyword.ToUpper();
+            _keyword = _keyword.ToUpper().Replace(" ", "");
             message = message.ToUpper();
 
             string result = "";

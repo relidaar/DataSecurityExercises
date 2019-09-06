@@ -9,15 +9,14 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         private string _keyword;
 
-        public PolybiusSquare(string keyword = "") => _keyword = keyword;
+        public PolybiusSquare(string keyword) => _keyword = keyword;
 
         public string Encrypt(string message)
         {
             if (message == null) return null;
-            if (message.Contains("J")) message = message.Replace("J", "I");
 
-            message = message.ToUpper();
-            _keyword = _keyword.ToUpper();
+            message = message.ToUpper().Replace("J", "I");
+            _keyword = _keyword.ToUpper().Replace(" ", "");
             _keyword = string.Join(string.Empty, _keyword.ToCharArray().Distinct());
 
             string result = "";

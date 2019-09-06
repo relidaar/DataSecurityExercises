@@ -8,22 +8,23 @@ namespace DataSecurity.Lab1_1
 {
     class Program
     {
-        private static readonly List<IEncoder> Encoders = new List<IEncoder>
-        {
-            new CaesarCipher(),
-            new SloganCipher(),
-            new PolybiusSquare(),
-            new TrithemiusCipher(),
-            new VigenereCipher(),
-            new PlayfairСipher()
-        };
-
         static void Main(string[] args)
         {
             Console.Write("Enter the message: ");
             string message = Console.ReadLine()?.ToUpper();
 
-            foreach (var encoder in Encoders)
+            var factory = new EncoderFactory();
+            var encoders = new List<IEncoder>
+            {
+                factory.UseCaesarCipher(),
+                factory.UseSloganCipher(),
+                factory.UseTrithemiusCipher(),
+                factory.UsePolybiusSquare(),
+                factory.UseVigenereCipher(),
+                factory.UsePlayfairCipher()
+            };
+
+            foreach (var encoder in encoders)
             {
                 var result = encoder.Encrypt(message) ?? "Error";
                 Console.WriteLine($"{encoder.Name}: {result}");

@@ -9,13 +9,13 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         private string _keyword;
 
-        public SloganCipher(string keyword = "secret") => _keyword = keyword;
+        public SloganCipher(string keyword) => _keyword = keyword;
 
         public string Encrypt(string message)
         {
             if (message == null) return null;
 
-            message = message.ToUpper();
+            message = message.ToUpper().Replace(" ", "");
             _keyword = _keyword.ToUpper();
             _keyword = string.Join(string.Empty, _keyword.ToCharArray().Distinct());
 

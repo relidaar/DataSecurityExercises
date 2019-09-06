@@ -12,7 +12,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         private string _keyword;
 
-        public PlayfairСipher(string keyword = "secret") => _keyword = keyword;
+        public PlayfairСipher(string keyword) => _keyword = keyword;
 
         public string Encrypt(string message)
         {
@@ -52,7 +52,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
                 }
             }
 
-            return result;
+            return result.Replace(" ", "");
         }
 
         private string GetInRect(char[,] matrix, int[] first, int[] second, string result)

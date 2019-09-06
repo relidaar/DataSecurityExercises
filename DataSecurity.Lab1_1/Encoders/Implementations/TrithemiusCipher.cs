@@ -10,7 +10,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
         private readonly int _b;
         private readonly int _c;
 
-        public TrithemiusCipher(int a = 2, int b = 5, int c = 3)
+        public TrithemiusCipher(int a, int b, int c)
         {
             _a = a;
             _b = b;

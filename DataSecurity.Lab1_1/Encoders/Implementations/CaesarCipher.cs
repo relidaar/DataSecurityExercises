@@ -8,7 +8,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         private readonly int _shift;
 
-        public CaesarCipher(int shift = 3) => _shift = shift;
+        public CaesarCipher(int shift) => _shift = shift;
 
         public string Encrypt(string message)
         {
