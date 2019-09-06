@@ -22,7 +22,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             if (_a < 0 || _b < 0 || _c < 0) return null;
             if (message == null) return null;
 
-            message = message.ToUpper();
+            message = message.ToUpper().Replace(" ", "");
             string result = "";
 
             foreach (var symbol in message)
