@@ -17,10 +17,9 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
         public string Encrypt(string message)
         {
             if (message == null) return null;
-            if (message.Contains("J")) message = message.Replace("J", "I");
 
-            message = message.ToUpper();
-            _keyword = _keyword.ToUpper();
+            message = message.ToUpper().Replace("J", "I");
+            _keyword = _keyword.ToUpper().Replace(" ", "");
             _keyword = string.Join(string.Empty, _keyword.ToCharArray().Distinct());
 
             string result = "";
@@ -64,11 +63,13 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
             if (y0 < y1)
             {
-                result += matrix[x0, y1] + matrix[x1, y0];
+                result += matrix[x0, y1];
+                result += matrix[x1, y0];
             }
             else
             {
-                result += matrix[x1, y0] + matrix[x0, y1];
+                result += matrix[x1, y0];
+                result += matrix[x0, y1];
             }
 
             return result;
@@ -82,14 +83,14 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             int y1 = second[1];
 
             if (y0 == 4)
-            {
-                result += matrix[x0, 0] + matrix[x1, y1 + 1];
-            }
+                result += matrix[x0, 0];
+            else
+                result += matrix[x0, y0 + 1];
 
             if (y1 == 4)
-            {
-                result += matrix[x1, 0] + matrix[x0, y0 + 1];
-            }
+                result += matrix[x1, 0];
+            else
+                result += matrix[x1, y1 + 1];
 
             return result;
         }
@@ -102,14 +103,14 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             int y1 = second[1];
 
             if (x0 == 4)
-            {
-                result += matrix[0, y0] + matrix[x1 + 1, y1];
-            }
+                result += matrix[0, y0];
+            else
+                result += matrix[x0 + 1, y0];
 
             if (x1 == 4)
-            {
-                result += matrix[0, y1] + matrix[x0 + 1, y0];
-            }
+                result += matrix[0, y1];
+            else
+                result += matrix[x1 + 1, y1];
 
             return result;
         }
@@ -158,6 +159,8 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             string pair = "";
             foreach (var symbol in message)
             {
+                if (!Characters.Contains(symbol)) continue;
+                
                 pair += symbol;
                 if (pair.Length != 2) continue;
 
