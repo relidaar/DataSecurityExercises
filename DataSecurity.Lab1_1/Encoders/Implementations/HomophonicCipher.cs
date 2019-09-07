@@ -31,28 +31,27 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
                 int index = Characters.IndexOf(symbol);
                 int secondIndex = rnd.Next(0, _frequencies[index]);
 
-                int number = key[index][secondIndex];
-                result += number + " ";
+                result += key[index][secondIndex] + " ";
             }
 
             return result;
         }
 
-        private int[][] GetKey()
+        private string[][] GetKey()
         {
-            var key = new int[Characters.Length][];
+            var key = new string[Characters.Length][];
 
             int index = 0;
             foreach (var frequency in _frequencies)
             {
-                var symbols = new int[frequency];
+                var symbols = new string[frequency];
                 var rnd = new Random();
                 for (int i = 0; i < frequency; i++)
                 {
                     int n1 = rnd.Next(0, 10);
                     int n2 = rnd.Next(0, 10);
                     int n3 = rnd.Next(0, 10);
-                    symbols[i] = int.Parse($"{n1}{n2}{n3}");
+                    symbols[i] = $"{n1}{n2}{n3}";
                 }
 
                 Array.Sort(symbols);
