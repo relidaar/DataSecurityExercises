@@ -49,8 +49,10 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
                 var rnd = new Random();
                 for (int i = 0; i < frequency; i++)
                 {
-                    int number = rnd.Next(100, 1000);
-                    symbols[i] = number;
+                    int n1 = rnd.Next(0, 10);
+                    int n2 = rnd.Next(0, 10);
+                    int n3 = rnd.Next(0, 10);
+                    symbols[i] = int.Parse($"{n1}{n2}{n3}");
                 }
 
                 Array.Sort(symbols);
