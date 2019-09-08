@@ -31,8 +31,9 @@ namespace DataSecurity.Lab1_1
 
                 foreach (var encoder in encoders)
                 {
-                    var result = encoder.Encrypt(message) ?? "Error";
-                    Console.WriteLine($"{encoder.Name}: {result}");
+                    var encrypted = encoder.Encrypt(message) ?? "Error";
+                    var decrypted = encoder.Decrypt(encrypted) ?? "Error";
+                    Console.WriteLine($"{encoder.Name}: {encrypted} - {decrypted}");
                 }
 
                 Console.Write("\nContinue? (y/n): ");

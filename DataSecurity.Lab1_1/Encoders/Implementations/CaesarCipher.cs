@@ -1,4 +1,5 @@
-﻿using DataSecurity.Lab1_1.Encoders.Interfaces;
+﻿using System;
+using DataSecurity.Lab1_1.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_1.Encoders.Implementations
 {
@@ -22,6 +23,27 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
                 if (!Characters.Contains(symbol)) continue;
 
                 int index = (Characters.IndexOf(symbol) + _shift) % Characters.Length;
+
+                result += Characters[index];
+            }
+
+            return result;
+        }
+
+        public string Decrypt(string encryptedMessage)
+        {
+            if (_shift < 0 || _shift > Characters.Length - 1) return null;
+            if (encryptedMessage == null) return null;
+
+            string result = "";
+
+            foreach (var symbol in encryptedMessage)
+            {
+                if (!Characters.Contains(symbol)) continue;
+
+                int index = Characters.IndexOf(symbol) - _shift;
+
+                if (index < 0) index = Characters.Length - Math.Abs(index);
 
                 result += Characters[index];
             }

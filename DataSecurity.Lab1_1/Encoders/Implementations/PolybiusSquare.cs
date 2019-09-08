@@ -34,5 +34,11 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
             return result;
         }
+
+        public string Decrypt(string encryptedMessage)
+        {
+            string result = "";
+            return result;
+        }
     }
 }

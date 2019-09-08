@@ -54,6 +54,12 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             return result.Replace(" ", "");
         }
 
+        public string Decrypt(string encryptedMessage)
+        {
+            string result = "";
+            return result;
+        }
+
         private string GetInRect(char[,] matrix, int[] first, int[] second, string result)
         {
             int x0 = first[0];

@@ -37,6 +37,12 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             return result;
         }
 
+        public string Decrypt(string encryptedMessage)
+        {
+            string result = "";
+            return result;
+        }
+
         private int GetShift(int p) => _a * p * p + _b * p + _c;
     }
 }

@@ -4,5 +4,6 @@
     {
         string Name { get; }
         string Encrypt(string message);
+        string Decrypt(string encryptedMessage);
     }
 }
