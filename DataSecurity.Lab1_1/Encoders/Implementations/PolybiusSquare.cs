@@ -22,23 +22,71 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             string result = "";
             string key = _keyword + string.Join("", Characters.Except(_keyword)).Replace("J", "");
 
-            foreach (var letter in message)
-            {
-                if (!Characters.Contains(letter)) continue;
+            var matrix = CreateMatrix(key);
 
-                int column = key.IndexOf(letter) % 5 + 1;
-                int row = key.IndexOf(letter) / 5 + 1;
+            foreach (var symbol in message)
+            {
+                if (!Characters.Contains(symbol)) continue;
+
+                int column = 0;
+                int row = 0;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if (matrix[i, j] == symbol)
+                        {
+                            row = i;
+                            column = j;
+                        }
+                    }
+                }
 
                 result += $"{row}{column} ";
+            }
+
+            return result.Trim();
+        }
+
+        public string Decrypt(string encryptedMessage)
+        {
+            if (encryptedMessage == null) return null;
+
+            var encryptedMessageIndices = encryptedMessage.Split(' ');
+            _keyword = _keyword.ToUpper().Replace(" ", "");
+            _keyword = string.Join(string.Empty, _keyword.ToCharArray().Distinct());
+
+            string result = "";
+            string key = _keyword + string.Join("", Characters.Except(_keyword)).Replace("J", "");
+
+            var matrix = CreateMatrix(key);
+
+            foreach (var indices in encryptedMessageIndices)
+            {
+                int row = indices[0] - '0';
+                int column = indices[1] - '0';
+
+                result += matrix[row, column];
             }
 
             return result;
         }
 
-        public string Decrypt(string encryptedMessage)
+        private char[,] CreateMatrix(string key)
         {
-            string result = "";
-            return result;
+            var matrix = new char[5, 5];
+            int current = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    matrix[i, j] = key[current];
+                    current++;
+                }
+            }
+
+            return matrix;
         }
     }
 }

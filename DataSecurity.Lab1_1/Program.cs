@@ -33,7 +33,7 @@ namespace DataSecurity.Lab1_1
                 {
                     var encrypted = encoder.Encrypt(message) ?? "Error";
                     var decrypted = encoder.Decrypt(encrypted) ?? "Error";
-                    Console.WriteLine($"{encoder.Name}: {encrypted} - {decrypted}");
+                    Console.WriteLine($"{encoder.Name}: {encrypted} ({decrypted})\n");
                 }
 
                 Console.Write("\nContinue? (y/n): ");
