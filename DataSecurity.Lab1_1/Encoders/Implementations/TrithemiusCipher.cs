@@ -1,4 +1,5 @@
-﻿using DataSecurity.Lab1_1.Encoders.Interfaces;
+﻿using System;
+using DataSecurity.Lab1_1.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_1.Encoders.Implementations
 {
@@ -39,9 +40,25 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
+            if (_a < 0 || _b < 0 || _c < 0) return null;
+            if (encryptedMessage == null) return null;
+
             string result = "";
+
+            foreach (var symbol in encryptedMessage)
+            {
+                if (!Characters.Contains(symbol)) continue;
+
+                int index = Mod(Characters.IndexOf(symbol) - GetShift(encryptedMessage.IndexOf(symbol)),
+                    Characters.Length);
+
+                result += Characters[index];
+            }
+
             return result;
         }
+
+        private int Mod(int x, int m) => (x % m + m) % m;
 
         private int GetShift(int p) => _a * p * p + _b * p + _c;
     }

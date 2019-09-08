@@ -41,14 +41,14 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             {
                 if (!Characters.Contains(symbol)) continue;
 
-                int index = Characters.IndexOf(symbol) - _shift;
-
-                if (index < 0) index = Characters.Length - Math.Abs(index);
+                int index = Mod(Characters.IndexOf(symbol) - _shift, Characters.Length);
 
                 result += Characters[index];
             }
 
             return result;
         }
+
+        private int Mod(int x, int m) => (x % m + m) % m;
     }
 }
