@@ -11,6 +11,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
         public string Name => "Playfair cipher";
 
         private string _keyword;
+        private char[,] _matrix;
 
         public PlayfairСipher(string keyword) => _keyword = keyword;
 
@@ -25,7 +26,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             string result = "";
             string key = _keyword + string.Join("", Characters.Except(_keyword)).Replace("J", "");
 
-            var matrix = CreateMatrix(key);
+            _matrix = CreateMatrix(key);
 
             var pairs = CreatePairs(message);
 
@@ -33,21 +34,25 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             {
                 if (!Characters.Contains(pair[0]) || !Characters.Contains(pair[1])) continue;
 
-                int[] first = GetCoordinates(pair[0], matrix);
-                int[] second = GetCoordinates(pair[1], matrix);
+                int[] first = GetCoordinates(pair[0], _matrix);
+                int[] second = GetCoordinates(pair[1], _matrix);
+
+                int x0 = first[0];
+                int y0 = first[1];
+                int x1 = second[0];
+                int y1 = second[1];
 
                 if (first[0] == second[0])
                 {
-                    result = GetInRow(matrix, first, second, result);
+                    result = GetInRow(_matrix, x0, y0, x1, y1, result);
                 }
                 else if (first[1] == second[1])
                 {
-                    result = GetInColumn(matrix, first, second, result);
+                    result = GetInColumn(_matrix, x0, y0, x1, y1, result);
                 }
                 else
                 {
-                    result = GetInRect(matrix, first, second, result);
-
+                    result = GetInRect(_matrix, x0, y0, x1, y1, result);
                 }
             }
 
@@ -56,67 +61,79 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
+            if (encryptedMessage == null) return null;
+
+            encryptedMessage = encryptedMessage.ToUpper().Replace("J", "I").Replace(" ", "");
+
             string result = "";
-            return result;
-        }
 
-        private string GetInRect(char[,] matrix, int[] first, int[] second, string result)
-        {
-            int x0 = first[0];
-            int y0 = first[1];
-            int x1 = second[0];
-            int y1 = second[1];
+            var pairs = CreatePairs(encryptedMessage);
 
-            if (y0 < y1)
+            foreach (var pair in pairs)
             {
-                result += matrix[x0, y1];
-                result += matrix[x1, y0];
+                if (!Characters.Contains(pair[0]) || !Characters.Contains(pair[1])) continue;
+
+                int[] first = GetCoordinates(pair[0], _matrix);
+                int[] second = GetCoordinates(pair[1], _matrix);
+
+                int x0 = first[0];
+                int y0 = first[1];
+                int x1 = second[0];
+                int y1 = second[1];
+
+                if (first[0] == second[0])
+                {
+                    result = GetInRowDecrypt(_matrix, x0, y0, x1, y1, result);
+                }
+                else if (first[1] == second[1])
+                {
+                    result = GetInColumnDecrypt(_matrix, x0, y0, x1, y1, result);
+                }
+                else
+                {
+                    result = GetInRect(_matrix, x0, y0, x1, y1, result);
+                }
             }
-            else
-            {
-                result += matrix[x1, y0];
-                result += matrix[x0, y1];
-            }
+
+            return result.Replace(" ", "");
+        }
+
+        private string GetInRect(char[,] matrix, int x0, int y0, int x1, int y1, string result)
+        {
+            result += matrix[x0, y1];
+            result += matrix[x1, y0];
 
             return result;
         }
 
-        private string GetInRow(char[,] matrix, int[] first, int[] second, string result)
+        private string GetInRow(char[,] matrix, int x0, int y0, int x1, int y1, string result)
         {
-            int x0 = first[0];
-            int y0 = first[1];
-            int x1 = second[0];
-            int y1 = second[1];
-
-            if (y0 == 4)
-                result += matrix[x0, 0];
-            else
-                result += matrix[x0, y0 + 1];
-
-            if (y1 == 4)
-                result += matrix[x1, 0];
-            else
-                result += matrix[x1, y1 + 1];
+            result += y0 == 4 ? matrix[x0, 0] : matrix[x0, y0 + 1];
+            result += y1 == 4 ? matrix[x1, 0] : matrix[x1, y1 + 1];
 
             return result;
         }
 
-        private string GetInColumn(char[,] matrix, int[] first, int[] second, string result)
+        private string GetInColumn(char[,] matrix, int x0, int y0, int x1, int y1, string result)
         {
-            int x0 = first[0];
-            int y0 = first[1];
-            int x1 = second[0];
-            int y1 = second[1];
+            result += x0 == 4 ? matrix[0, y0] : matrix[x0 + 1, y0];
+            result += x1 == 4 ? matrix[0, y1] : matrix[x1 + 1, y1];
 
-            if (x0 == 4)
-                result += matrix[0, y0];
-            else
-                result += matrix[x0 + 1, y0];
+            return result;
+        }
 
-            if (x1 == 4)
-                result += matrix[0, y1];
-            else
-                result += matrix[x1 + 1, y1];
+        private string GetInRowDecrypt(char[,] matrix, int x0, int y0, int x1, int y1, string result)
+        {
+            result += y0 == 0 ? matrix[x0, 4] : matrix[x0, y0 - 1];
+            result += y1 == 0 ? matrix[x1, 4] : matrix[x1, y1 - 1];
+
+            return result;
+        }
+
+        private string GetInColumnDecrypt(char[,] matrix, int x0, int y0, int x1, int y1, string result)
+        {
+            result += x0 == 0 ? matrix[4, y0] : matrix[x0 - 1, y0];
+            result += x1 == 0 ? matrix[4, y1] : matrix[x1 - 1, y1];
 
             return result;
         }
