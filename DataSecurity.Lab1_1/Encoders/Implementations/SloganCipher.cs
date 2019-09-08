@@ -35,7 +35,23 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
+            if (encryptedMessage == null) return null;
+
+            encryptedMessage = encryptedMessage.ToUpper().Replace(" ", "");
+            _keyword = _keyword.ToUpper().Replace(" ", "");
+            _keyword = string.Join(string.Empty, _keyword.ToCharArray().Distinct());
+
             string result = "";
+            string key = _keyword + string.Join(string.Empty, Characters.Except(_keyword));
+
+            foreach (var symbol in encryptedMessage)
+            {
+                if (!Characters.Contains(symbol)) continue;
+
+                int index = key.IndexOf(symbol);
+                result += Characters[index];
+            }
+
             return result;
         }
     }
