@@ -38,8 +38,31 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
+            if (encryptedMessage == null) return null;
+
+            _keyword = _keyword.ToUpper().Replace(" ", "");
+            encryptedMessage = encryptedMessage.ToUpper().Replace(" ", "");
+
             string result = "";
+            int keywordIndex = 0;
+
+            foreach (var symbol in encryptedMessage)
+            {
+                if (!Characters.Contains(symbol)) continue;
+
+                int index = Mod(
+                    Characters.IndexOf(symbol) + Characters.Length - Characters.IndexOf(_keyword[keywordIndex]),
+                    Characters.Length);
+
+                result += Characters[index];
+                keywordIndex++;
+
+                if (keywordIndex + 1 == _keyword.Length) keywordIndex = 0;
+            }
+
             return result;
         }
+
+        private int Mod(int x, int m) => (x % m + m) % m;
     }
 }
