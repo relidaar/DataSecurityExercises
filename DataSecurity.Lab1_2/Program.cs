@@ -14,7 +14,8 @@ namespace DataSecurity.Lab1_2
             {
                 factory.UseSimpleTranspositionCipher(),
                 factory.UseBlockTranspositionCipher(),
-                factory.UseRouteCipher()
+                factory.UseRouteCipher(),
+                factory.UseVerticalTranspositionCipher()
             };
 
             while (true)
