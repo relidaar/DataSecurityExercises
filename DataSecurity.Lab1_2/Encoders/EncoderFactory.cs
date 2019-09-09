@@ -9,5 +9,6 @@ namespace DataSecurity.Lab1_2.Encoders
     class EncoderFactory
     {
         public IEncoder UseSimpleTranspositionCipher() => new SimpleTranspositionСipher();
+        public IEncoder UseBlockTranspositionCipher(int blockSize = 3) => new BlockTranspositionCipher(blockSize);
     }
 }
