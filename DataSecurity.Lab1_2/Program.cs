@@ -13,7 +13,8 @@ namespace DataSecurity.Lab1_2
             var encoders = new List<IEncoder>
             {
                 factory.UseSimpleTranspositionCipher(),
-                factory.UseBlockTranspositionCipher()
+                factory.UseBlockTranspositionCipher(),
+                factory.UseRouteCipher()
             };
 
             while (true)
