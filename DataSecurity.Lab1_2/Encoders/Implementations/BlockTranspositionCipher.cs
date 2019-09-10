@@ -98,15 +98,16 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         private string[] CreateMessageBlocks(string message)
         {
+            int n = _blockSize;
             var blocks = new List<string>();
 
-            for (var i = 0; i < message.Length; i+=_blockSize)
+            for (var i = 0; i < message.Length; i+=n)
             {
                 string str = "";
 
-                for (int j = 0; j < _blockSize; j++)
+                for (int j = i; j < i+n; j++)
                 {
-                    str += message[i];
+                    str += message[j];
                 }
 
                 blocks.Add(str);
