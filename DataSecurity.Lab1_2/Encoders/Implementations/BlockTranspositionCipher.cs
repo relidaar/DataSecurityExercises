@@ -8,7 +8,9 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
     class BlockTranspositionCipher : IEncoder
     {
         private List<int[,]> _key;
-        private int _blockSize;
+        private readonly int _blockSize;
+
+        private char _placeholder = '*';
 
         public BlockTranspositionCipher(int blockSize) => _blockSize = blockSize;
 
@@ -16,10 +18,10 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         public string Encrypt(string message)
         {
-            if (message == null) return null;
+            if (string.IsNullOrEmpty(message)) return null;
 
             message = message.ToUpper().Replace(" ", "");
-            while (message.Length % _blockSize != 0) message += "*";
+            while (message.Length % _blockSize != 0) message += _placeholder;
 
             int n = message.Length / _blockSize;
 
@@ -47,7 +49,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
-            if (encryptedMessage == null || _key == null) return null;
+            if (string.IsNullOrEmpty(encryptedMessage)) return null;
 
             encryptedMessage = encryptedMessage.ToUpper().Replace(" ", "");
 
@@ -70,7 +72,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
                 result += string.Concat(blockResult);
             }
 
-            return result;
+            return result.Trim(_placeholder);
         }
 
         private void CreateKey(int n)

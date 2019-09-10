@@ -10,19 +10,20 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
         public string Name => "Vertical transposition cipher";
 
         private readonly string _keyword;
+        private char _placeholder = '*';
 
         public VerticalTranspositionCipher(string keyword) => _keyword = keyword.ToUpper().Replace(" ", "");
 
         public string Encrypt(string message)
         {
-            if (message == null) return null;
+            if (string.IsNullOrEmpty(message)) return null;
 
             var key = CreateKey();
 
             int m = _keyword.Length;
 
             message = message.ToUpper().Replace(" ", "");
-            while (message.Length % m != 0) message += "*";
+            while (message.Length % m != 0) message += _placeholder;
 
             int n = message.Length / m;
 
@@ -53,14 +54,14 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
-            if (encryptedMessage == null) return null;
+            if (string.IsNullOrEmpty(encryptedMessage)) return null;
 
             var key = CreateKey();
 
             int m = _keyword.Length;
 
             encryptedMessage = encryptedMessage.ToUpper().Replace(" ", "");
-            while (encryptedMessage.Length % m != 0) encryptedMessage += "*";
+            while (encryptedMessage.Length % m != 0) encryptedMessage += _placeholder;
 
             int n = encryptedMessage.Length / m;
 
@@ -86,7 +87,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
                 }
             }
 
-            return result;
+            return result.Trim(_placeholder);
         }
 
         private int[] CreateKey()

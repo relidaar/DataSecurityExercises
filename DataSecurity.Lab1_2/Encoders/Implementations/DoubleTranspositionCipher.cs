@@ -14,15 +14,16 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         private int[] _rows;
         private int[] _columns;
+        private char _placeholder = '*';
 
         public DoubleTranspositionCipher(int blockSize) => _blockSize = blockSize;
 
         public string Encrypt(string message)
         {
-            if (message == null) return null;
+            if (string.IsNullOrEmpty(message)) return null;
 
             message = message.ToUpper().Replace(" ", "");
-            while (message.Length % (_blockSize * _blockSize) != 0) message += "*";
+            while (message.Length % (_blockSize * _blockSize) != 0) message += _placeholder;
 
             _rows = GenerateNums();
             _columns = GenerateNums();
@@ -54,7 +55,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
-            if (encryptedMessage == null) return null;
+            if (string.IsNullOrEmpty(encryptedMessage)) return null;
 
             var encryptedBlocks = CreateEncryptedMessageBlocks(encryptedMessage);
 
@@ -71,7 +72,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
                 }
             }
 
-            return result;
+            return result.Trim(_placeholder);
             //var decryptedBlocks = new List<char[,]>();
 
             //foreach (var encryptedBlock in encryptedBlocks)

@@ -13,7 +13,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         public string Encrypt(string message)
         {
-            if (message == null) return null;
+            if (string.IsNullOrEmpty(message)) return null;
 
             message = message.ToUpper().Replace(" ", "");
 
@@ -31,7 +31,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
-            if (encryptedMessage == null || _key == null) return null;
+            if (string.IsNullOrEmpty(encryptedMessage)) return null;
 
             encryptedMessage = encryptedMessage.ToUpper().Replace(" ", "");
             int n = encryptedMessage.Length;

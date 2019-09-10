@@ -9,14 +9,16 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
     {
         private readonly int[,] _key = { { 16, 3, 2, 13 }, { 9, 6, 7, 12 }, { 5, 10, 11, 8 }, { 4, 15, 14, 1 } };
 
+        private static char _placeholder = '*';
+
         public string Name => "Magic square";
         
         public string Encrypt(string message)
         {
-            if (message == null) return null;
+            if (string.IsNullOrEmpty(message)) return null;
 
             message = message.ToUpper().Replace(" ", "");
-            while (message.Length % 16 != 0) message += "*";
+            while (message.Length % 16 != 0) message += _placeholder;
 
             var messageBlocks = CreateMessageBlocks(message, 16);
 
@@ -38,7 +40,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
-            if (encryptedMessage == null) return null;
+            if (string.IsNullOrEmpty(encryptedMessage)) return null;
 
             var messageBlocks = CreateMessageBlocks(encryptedMessage, 16);
 
@@ -55,7 +57,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
                 }
             }
 
-            return result;
+            return result.Trim(_placeholder);
         }
 
         private char[,] CreateEncryptedBlock(string messageBlock)

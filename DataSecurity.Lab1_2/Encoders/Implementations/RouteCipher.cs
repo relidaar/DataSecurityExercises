@@ -10,15 +10,16 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
         public string Name => "Route cipher";
 
         private readonly int columns;
+        private char _placeholder = '*';
 
         public RouteCipher(int numberOfColumns) => columns = numberOfColumns;
 
         public string Encrypt(string message)
         {
-            if (message == null) return null;
+            if (string.IsNullOrEmpty(message)) return null;
 
             message = message.ToUpper().Replace(" ", "");
-            while (message.Length % columns != 0) message += "*";
+            while (message.Length % columns != 0) message += _placeholder;
 
             int rows = message.Length / columns;
 
@@ -49,10 +50,10 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 
         public string Decrypt(string encryptedMessage)
         {
-            if (encryptedMessage == null) return null;
+            if (string.IsNullOrEmpty(encryptedMessage)) return null;
 
             encryptedMessage = encryptedMessage.ToUpper().Replace(" ", "");
-            while (encryptedMessage.Length % columns != 0) encryptedMessage += "*";
+            while (encryptedMessage.Length % columns != 0) encryptedMessage += _placeholder;
 
             int rows = encryptedMessage.Length / columns;
 
@@ -78,7 +79,7 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
                 }
             }
 
-            return result;
+            return result.Trim(_placeholder);
         }
     }
 }
