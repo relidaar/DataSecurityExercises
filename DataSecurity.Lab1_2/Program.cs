@@ -16,7 +16,8 @@ namespace DataSecurity.Lab1_2
                 factory.UseBlockTranspositionCipher(),
                 factory.UseRouteCipher(),
                 factory.UseVerticalTranspositionCipher(),
-                factory.UseMagicSquare()
+                factory.UseMagicSquare(),
+                factory.UseDoubleTranspositionCipher()
             };
 
             while (true)

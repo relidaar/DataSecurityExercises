@@ -13,5 +13,6 @@ namespace DataSecurity.Lab1_2.Encoders
         public IEncoder UseRouteCipher(int numberOfColumns = 3) => new RouteCipher(numberOfColumns);
         public IEncoder UseVerticalTranspositionCipher(string keyword = "secret") => new VerticalTranspositionCipher(keyword);
         public IEncoder UseMagicSquare() => new MagicSquare();
+        public IEncoder UseDoubleTranspositionCipher(int blockSize = 4) => new DoubleTranspositionCipher(blockSize);
     }
 }

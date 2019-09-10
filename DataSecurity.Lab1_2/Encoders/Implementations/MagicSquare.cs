@@ -7,9 +7,9 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
 {
     public class MagicSquare : IEncoder
     {
-        private int[,] _key = { { 16, 3, 2, 13 }, { 9, 6, 7, 12 }, { 5, 10, 11, 8 }, { 4, 15, 14, 1 } };
+        private readonly int[,] _key = { { 16, 3, 2, 13 }, { 9, 6, 7, 12 }, { 5, 10, 11, 8 }, { 4, 15, 14, 1 } };
 
-        public string Name => "Magic _key";
+        public string Name => "Magic square";
         
         public string Encrypt(string message)
         {
