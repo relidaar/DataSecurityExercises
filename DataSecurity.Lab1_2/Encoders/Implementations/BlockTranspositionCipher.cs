@@ -100,9 +100,15 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
         {
             var blocks = new List<string>();
 
-            for (var i = 0; i < message.Length; i+=3)
+            for (var i = 0; i < message.Length; i+=_blockSize)
             {
-                var str = $"{message[i]}{message[i+1]}{message[i+2]}";
+                string str = "";
+
+                for (int j = 0; j < _blockSize; j++)
+                {
+                    str += message[i];
+                }
+
                 blocks.Add(str);
             }
 
