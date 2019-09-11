@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_1", "DataSecurity.Lab1_1\DataSecurity.Lab1_1.csproj", "{D8627CAE-0FD1-47D8-B799-FDA1E3A4DBB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_2", "DataSecurity.Lab1_2\DataSecurity.Lab1_2.csproj", "{98A2ACBC-44A4-4276-B542-BC713F2440CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_2", "DataSecurity.Lab1_2\DataSecurity.Lab1_2.csproj", "{98A2ACBC-44A4-4276-B542-BC713F2440CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_6", "DataSecurity.Lab1_6\DataSecurity.Lab1_6.csproj", "{7AC5E564-B0B7-4FEA-A575-F75773B40FE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{98A2ACBC-44A4-4276-B542-BC713F2440CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98A2ACBC-44A4-4276-B542-BC713F2440CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98A2ACBC-44A4-4276-B542-BC713F2440CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC5E564-B0B7-4FEA-A575-F75773B40FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC5E564-B0B7-4FEA-A575-F75773B40FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC5E564-B0B7-4FEA-A575-F75773B40FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC5E564-B0B7-4FEA-A575-F75773B40FE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
