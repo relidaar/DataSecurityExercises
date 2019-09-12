@@ -9,5 +9,6 @@ namespace DataSecurity.Lab1_6.Encoders
     class EncoderFactory
     {
         public IEncoder UseDirectBinary() => new DirectBinary();
+        public IEncoder UseReverseBinary() => new ReverseBinary();
     }
 }

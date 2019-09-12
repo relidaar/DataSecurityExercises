@@ -14,7 +14,8 @@ namespace DataSecurity.Lab1_6
             var factory = new EncoderFactory();
             var encoders = new List<IEncoder>
             {
-                factory.UseDirectBinary()
+                factory.UseDirectBinary(),
+                factory.UseReverseBinary()
             };
 
             while (true)
@@ -30,7 +31,7 @@ namespace DataSecurity.Lab1_6
                     foreach (var number in input)
                     {
                         var encrypted = encoder.Encrypt(number) ?? "Error";
-                        Console.Write($"{encrypted}; ");
+                        Console.Write($"{encrypted}({number}); ");
                     }
                     Console.WriteLine();
                 }

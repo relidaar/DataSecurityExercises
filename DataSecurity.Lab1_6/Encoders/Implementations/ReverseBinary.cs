@@ -9,7 +9,33 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
 
         public string Encrypt(string number)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(number)) return null;
+            if (!int.TryParse(number, out int num)) return null;
+
+            string result = GetBinary(Math.Abs(num), Math.Abs(num));
+            while (result.Length % 8 != 0)
+            {
+                result = '0' + result;
+            }
+
+            if (num >= 0) return result;
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                var digit = result[i];
+
+                switch (digit)
+                {
+                    case '0':
+                        result = result.ReplaceAt(i, '1');
+                        break;
+                    case '1':
+                        result = result.ReplaceAt(i, '0');
+                        break;
+                }
+            }
+
+            return result;
         }
 
         public string Decrypt(string encryptedNumber)
@@ -17,9 +43,15 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
             throw new NotImplementedException();
         }
 
-        private string GetBinary(int abs, int i)
+        private string GetBinary(int number, int quotient)
         {
-            throw new NotImplementedException();
+            if (quotient == 0) return "";
+
+            number = quotient;
+            int remainder = number % 2;
+            quotient = number / 2;
+
+            return GetBinary(number, quotient) + remainder;
         }
     }
 }
