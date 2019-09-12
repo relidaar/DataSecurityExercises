@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataSecurity.Lab1_6.Encoders;
-using DataSecurity.Lab1_6.Interfaces;
+using DataSecurity.Lab1_6.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_6
 {
@@ -14,18 +14,18 @@ namespace DataSecurity.Lab1_6
             var factory = new EncoderFactory();
             var encoders = new List<IEncoder>
             {
+                factory.UseDirectBinary()
             };
 
             while (true)
             {
                 Console.Clear();
+                Console.Write("Enter the number: ");
+                string number = Console.ReadLine();
+                Console.WriteLine();
 
                 foreach (var encoder in encoders)
                 {
-                    Console.Write("Enter the message: ");
-                    string number = Console.ReadLine();
-                    Console.WriteLine();
-
                     var encrypted = encoder.Encrypt(number) ?? "Error";
                     var decrypted = encoder.Decrypt(encrypted) ?? "Error";
                     Console.WriteLine($"{encoder.Name}: {encrypted} ({decrypted})\n");

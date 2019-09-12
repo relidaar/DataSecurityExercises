@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DataSecurity.Lab1_6.Interfaces;
+using DataSecurity.Lab1_6.Encoders.Interfaces;
 
-namespace DataSecurity.Lab1_6
+namespace DataSecurity.Lab1_6.Encoders.Implementations
 {
     class ReverseBinary : IEncoder
     {
