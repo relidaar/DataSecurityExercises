@@ -4,7 +4,7 @@ using DataSecurity.Lab1_6.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_6.Encoders.Implementations
 {
-    class AdditionalBinary : IEncoder
+    class AdditionalBinary : BaseEncoder, IEncoder
     {
         public string Name => "Additional binary";
 
@@ -46,17 +46,6 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
         public string Decrypt(string encryptedNumber)
         {
             throw new NotImplementedException();
-        }
-
-        private string GetBinary(int number, int quotient)
-        {
-            if (quotient == 0) return "";
-
-            number = quotient;
-            int remainder = number % 2;
-            quotient = number / 2;
-
-            return GetBinary(number, quotient) + remainder;
         }
     }
 }
