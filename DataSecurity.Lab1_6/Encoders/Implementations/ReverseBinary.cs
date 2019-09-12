@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using DataSecurity.Lab1_6.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_6.Encoders.Implementations
@@ -17,6 +18,7 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
             {
                 result = '0' + result;
             }
+            result = Regex.Replace(result, ".{4}", "$0 ");
 
             if (num >= 0) return result;
 
@@ -24,15 +26,8 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
             {
                 var digit = result[i];
 
-                switch (digit)
-                {
-                    case '0':
-                        result = result.ReplaceAt(i, '1');
-                        break;
-                    case '1':
-                        result = result.ReplaceAt(i, '0');
-                        break;
-                }
+                if (digit == '0') result = result.ReplaceAt(i, '1');
+                else if (digit == '1') result = result.ReplaceAt(i, '0');
             }
 
             return result;
