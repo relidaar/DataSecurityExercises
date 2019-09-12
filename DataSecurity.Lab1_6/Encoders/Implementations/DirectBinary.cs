@@ -13,8 +13,17 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
             if (!int.TryParse(number, out int num)) return null;
 
             string result = GetBinary(Math.Abs(num), Math.Abs(num));
+            while (result.Length % 8 != 0)
+            {
+                result = '0' + result;
+            }
 
-            return num > 0 ? '0' + result : '1' + result;
+            if (num >= 0) return result;
+
+            result = result.Remove(0, 1);
+            result = '1' + result;
+
+            return result;
         }
 
         public string Decrypt(string encryptedNumber)

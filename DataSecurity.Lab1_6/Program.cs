@@ -20,21 +20,25 @@ namespace DataSecurity.Lab1_6
             while (true)
             {
                 Console.Clear();
-                Console.Write("Enter the number: ");
-                string number = Console.ReadLine();
+                Console.Write("Enter the number or numbers: ");
+                var input = Console.ReadLine()?.Split(" ");
                 Console.WriteLine();
 
                 foreach (var encoder in encoders)
                 {
-                    var encrypted = encoder.Encrypt(number) ?? "Error";
-                    var decrypted = encoder.Decrypt(encrypted) ?? "Error";
-                    Console.WriteLine($"{encoder.Name}: {encrypted} ({decrypted})\n");
+                    Console.Write($"{encoder.Name}: ");
+                    foreach (var number in input)
+                    {
+                        var encrypted = encoder.Encrypt(number) ?? "Error";
+                        Console.Write($"{encrypted}; ");
+                    }
+                    Console.WriteLine();
                 }
 
                 Console.Write("\nContinue? (y/n): ");
-                var input = Console.ReadLine();
+                string answer = Console.ReadLine();
 
-                if (input == "n") break;
+                if (answer == "n") break;
             }
         }
     }

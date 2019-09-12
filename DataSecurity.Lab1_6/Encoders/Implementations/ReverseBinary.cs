@@ -16,5 +16,10 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
         {
             throw new NotImplementedException();
         }
+
+        private string GetBinary(int abs, int i)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
