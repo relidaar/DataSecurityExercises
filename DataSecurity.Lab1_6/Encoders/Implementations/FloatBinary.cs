@@ -5,7 +5,7 @@ using DataSecurity.Lab1_6.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_6.Encoders.Implementations
 {
-    class FloatBinary : IEncoder
+    class FloatBinary : BaseEncoder, IEncoder
     {
         public string Name => "Float binary";
 
