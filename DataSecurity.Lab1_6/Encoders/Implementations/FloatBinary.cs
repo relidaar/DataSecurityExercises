@@ -47,7 +47,7 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
             while (mantissa.Length < 15) mantissa += '0';
             mantissa = Regex.Replace(mantissa, ".{4}", "$0 ");
 
-            return $"{sign} {exponent} {sign} {mantissa} ";
+            return $"{sign}  {exponent}  {sign}  {mantissa} ";
         }
 
         public string Decrypt(string encryptedNumber)
