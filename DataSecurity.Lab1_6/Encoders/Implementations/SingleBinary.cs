@@ -47,13 +47,14 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
             while (mantissa.Length < 23) mantissa += '0';
             mantissa = Regex.Replace(mantissa, ".{4}", "$0 ");
 
-            return $"{sign}  {exponent}  {mantissa} ";
+            return $"{sign} {exponent} {mantissa} ";
         }
 
         public string Decrypt(string encryptedNumber)
         {
             throw new NotImplementedException();
         }
+
         private string GetFractionalBinary(double number)
         {
             if (number == 0) return "0";

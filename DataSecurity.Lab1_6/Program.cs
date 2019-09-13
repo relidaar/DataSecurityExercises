@@ -17,6 +17,7 @@ namespace DataSecurity.Lab1_6
                 factory.UseDirectBinary(),
                 factory.UseReverseBinary(),
                 factory.UseAdditionalBinary(),
+                factory.UseFloatBinary(),
                 factory.UseSingleBinary()
             };
 
