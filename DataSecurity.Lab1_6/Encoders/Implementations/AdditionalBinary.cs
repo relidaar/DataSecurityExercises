@@ -38,9 +38,7 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
                 }
             }
 
-            int n = result.Length - 1;
-            result = result[n] == '0' ? result.ReplaceAt(n, '1') : 
-                Convert.ToString(Convert.ToInt32(result, 2) + 1, 2);
+            result = Convert.ToString(Convert.ToInt32(result, 2) + 1, 2);
 
             return Regex.Replace(result, ".{4}", "$0 ");
         }
