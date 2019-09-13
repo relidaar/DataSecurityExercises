@@ -6,15 +6,14 @@ namespace DataSecurity.Lab1_6.Encoders.Interfaces
 {
     class BaseEncoder
     {
-        protected string GetBinary(int number, int quotient)
+        protected string GetBinary(int number)
         {
-            if (quotient == 0) return "";
+            if (number == 0) return "";
 
-            number = quotient;
             int remainder = number % 2;
-            quotient = number / 2;
+            number /= 2;
 
-            return GetBinary(number, quotient) + remainder;
+            return GetBinary(number) + remainder;
         }
     }
 }

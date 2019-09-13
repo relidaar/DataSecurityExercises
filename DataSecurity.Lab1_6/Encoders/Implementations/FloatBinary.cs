@@ -5,9 +5,9 @@ using DataSecurity.Lab1_6.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_6.Encoders.Implementations
 {
-    class DoubleBinary : IEncoder
+    class FloatBinary : IEncoder
     {
-        public string Name => "Double binary";
+        public string Name => "Float binary";
 
         public string Encrypt(string number)
         {

@@ -11,13 +11,13 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
         public string Encrypt(string number)
         {
             if (string.IsNullOrEmpty(number)) return null;
+            if (number.Equals("0")) return "0000 0000";
+            if (number.Equals("-0")) return "1111 1111";
             if (!int.TryParse(number, out int num)) return null;
 
-            string result = GetBinary(Math.Abs(num), Math.Abs(num));
-            while (result.Length % 8 != 0)
-            {
-                result = '0' + result;
-            }
+            string result = GetBinary(Math.Abs(num));
+            while (result.Length % 8 != 0) result = '0' + result;
+
             result = Regex.Replace(result, ".{4}", "$0 ");
 
             if (num >= 0) return result;

@@ -11,5 +11,6 @@ namespace DataSecurity.Lab1_6.Encoders
         public IEncoder UseDirectBinary() => new DirectBinary();
         public IEncoder UseReverseBinary() => new ReverseBinary();
         public IEncoder UseAdditionalBinary() => new AdditionalBinary();
+        public IEncoder UseSingleBinary() => new SingleBinary();
     }
 }
