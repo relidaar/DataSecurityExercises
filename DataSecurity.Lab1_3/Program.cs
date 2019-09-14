@@ -12,7 +12,8 @@ namespace DataSecurity.Lab1_3
             var factory = new EncoderFactory();
             var encoders = new List<IEncoder>
             {
-                factory.UseGammaCipher()
+                factory.UseGammaCipher(),
+                factory.UseXorCipher()
             };
 
             while (true)

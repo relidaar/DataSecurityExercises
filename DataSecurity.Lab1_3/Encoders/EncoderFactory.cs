@@ -9,5 +9,6 @@ namespace DataSecurity.Lab1_3.Encoders
     class EncoderFactory
     {
         public IEncoder UseGammaCipher(int gammaCount = 10) => new GammaCipher(gammaCount); 
+        public IEncoder UseXorCipher(int gammaCount = 10) => new XorCipher(gammaCount);
     }
 }
