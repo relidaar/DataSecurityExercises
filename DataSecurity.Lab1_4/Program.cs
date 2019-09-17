@@ -7,7 +7,7 @@ namespace DataSecurity.Lab1_4
     {
         static void Main(string[] args)
         {
-            IEncoder encoder = null;
+            IEncoder encoder = new AdfgvxCipher("secret");
             while (true)
             {
                 Console.Clear();
