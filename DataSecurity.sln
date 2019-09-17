@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_2", "Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_6", "DataSecurity.Lab1_6\DataSecurity.Lab1_6.csproj", "{7AC5E564-B0B7-4FEA-A575-F75773B40FE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_3", "DataSecurity.Lab1_3\DataSecurity.Lab1_3.csproj", "{A4AE159A-06DF-4959-81F6-D8F77BAE1745}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_3", "DataSecurity.Lab1_3\DataSecurity.Lab1_3.csproj", "{A4AE159A-06DF-4959-81F6-D8F77BAE1745}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_4", "DataSecurity.Lab1_4\DataSecurity.Lab1_4.csproj", "{4390AF98-8DAC-48A9-980A-E14DC05DF283}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A4AE159A-06DF-4959-81F6-D8F77BAE1745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4AE159A-06DF-4959-81F6-D8F77BAE1745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4AE159A-06DF-4959-81F6-D8F77BAE1745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4390AF98-8DAC-48A9-980A-E14DC05DF283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4390AF98-8DAC-48A9-980A-E14DC05DF283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4390AF98-8DAC-48A9-980A-E14DC05DF283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4390AF98-8DAC-48A9-980A-E14DC05DF283}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
