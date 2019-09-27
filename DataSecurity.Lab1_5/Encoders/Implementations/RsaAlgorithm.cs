@@ -14,13 +14,27 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
         private int _e;
         private int _d;
         private int _n;
+        private int _m;
+        private int _p;
+        private int _q;
+        private readonly int _lowerBound;
+        private readonly int _upperBound;
 
-        public RsaAlgorithm(int lowerBound, int upperBound) => GenerateKey(lowerBound, upperBound);
+        public RsaAlgorithm(int lowerBound, int upperBound)
+        {
+            if (lowerBound <= 0 || upperBound <= 0) return;
+            if (lowerBound >= upperBound) return;
+
+            _lowerBound = lowerBound;
+            _upperBound = upperBound;
+        }
 
         public string Encrypt(string message)
         {
             if (string.IsNullOrEmpty(message)) return null;
             message = message.ToUpper();
+
+            GenerateKey();
 
             string result = "";
             foreach (var symbol in message.Where(symbol => Characters.Contains(symbol)))
@@ -47,41 +61,41 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
             return result;
         }
 
-        private void GenerateKey(int lowerBound, int upperBound)
+        private void GenerateKey()
         {
-            var p = GetPrime(lowerBound, upperBound);
-            var q = GetPrime(lowerBound, upperBound);
+            _p = GetPrime();
+            _q = GetPrime();
 
-            _n = p * q;
-            var m = (p - 1) * (q - 1);
-            _d = GetD(lowerBound, upperBound, m);
-            _e = GetE(lowerBound, m);
+            _n = _p * _q;
+            _m = (_p - 1) * (_q - 1);
+            _d = GetD();
+            _e = GetE();
         }
 
-        private static int GetPrime(int lowerBound, int upperBound)
+        private int GetPrime()
         {
             var rnd = new Random();
-            int number = rnd.Next(lowerBound, upperBound);
-            while (!IsPrime(number)) number = rnd.Next(lowerBound, upperBound);
+            int number = rnd.Next(_lowerBound, _upperBound);
+            while (!IsPrime(number)) number = rnd.Next(_lowerBound, _upperBound);
 
             return number;
         }
 
-        private int GetD(int lowerBound, int upperBound, int m)
+        private int GetD()
         {
             var rnd = new Random();
-            int d = rnd.Next(lowerBound, upperBound);
-            while (GetNod (d, m) != 1) d = rnd.Next(lowerBound, upperBound);
+            int d = rnd.Next(_lowerBound, _upperBound);
+            while (GetNod (d, _m) != 1) d = rnd.Next(_lowerBound, _upperBound);
 
             return d;
         }
 
-        private int GetE(int n, int m)
+        private int GetE()
         {
-            int e = n;
+            int e = _lowerBound;
             while (true)
             {
-                if (e * _d % m == 1) break;
+                if (e * _d % _m == 1) break;
                 e++;
             }
 
