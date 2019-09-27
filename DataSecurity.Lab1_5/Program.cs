@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataSecurity.Lab1_5.Encoders.Implementations;
 using DataSecurity.Lab1_5.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_5
@@ -10,7 +11,7 @@ namespace DataSecurity.Lab1_5
         {
             var encoders = new List<IEncoder>
             {
-
+                new RsaAlgorithm(10, 100)
             };
 
             while (true)
