@@ -26,6 +26,15 @@ namespace DataSecurity.Lab1_4.Encoder
 
             CreateMatrix();
 
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    Console.Write(_matrix[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
             string cipherText = "";
             foreach (var symbol in message)
             {
@@ -42,6 +51,7 @@ namespace DataSecurity.Lab1_4.Encoder
                     }
                 }
             }
+            Console.WriteLine();
 
             int m = _keyword.Length;
             while (cipherText.Length % m != 0) cipherText += Placeholder;
@@ -63,14 +73,21 @@ namespace DataSecurity.Lab1_4.Encoder
 
             string result = "";
 
+            foreach (var c in _keyword) Console.Write(c + " ");
+
+            Console.WriteLine();
+
             foreach (var i in key)
             {
+                Console.Write(i + " ");
                 for (int j = 0; j < n; j++)
                 {
                     var current = table[j, i];
                     result += current;
                 }
             }
+
+            Console.WriteLine();
 
             return result;
         }
