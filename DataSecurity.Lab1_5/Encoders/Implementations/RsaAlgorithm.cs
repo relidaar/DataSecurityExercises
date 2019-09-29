@@ -32,14 +32,13 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
         public string Encrypt(string message)
         {
             if (string.IsNullOrEmpty(message)) return null;
-            message = message.ToUpper();
 
             GenerateKey();
 
             string result = "";
-            foreach (var symbol in message.Where(symbol => Characters.Contains(symbol)))
+            foreach (var symbol in message)
             {
-                var index = Characters.IndexOf(symbol);
+                var index = (int)symbol;
                 result += BigInteger.Pow(index, _e) % _n + " ";
             }
 
@@ -55,7 +54,7 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
             {
                 var number = int.Parse(symbol);
                 var index = Convert.ToInt32((BigInteger.Pow(number, _d) % _n).ToString());
-                result += Characters[index];
+                result += (char) index;
             }
 
             return result;
@@ -76,7 +75,7 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
         {
             var rnd = new Random();
             int number = rnd.Next(_lowerBound, _upperBound);
-            while (!IsPrime(number)) number = rnd.Next(_lowerBound, _upperBound);
+            while (!number.IsPrime()) number = rnd.Next(_lowerBound, _upperBound);
 
             return number;
         }
@@ -85,7 +84,7 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
         {
             var rnd = new Random();
             int d = rnd.Next(_lowerBound, _upperBound);
-            while (GetNod (d, _m) != 1) d = rnd.Next(_lowerBound, _upperBound);
+            while (Extensions.GetNod(d, _m) != 1) d = rnd.Next(_lowerBound, _upperBound);
 
             return d;
         }
@@ -100,31 +99,6 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
             }
 
             return e;
-        }
-
-        private static int GetNod(int a, int b)
-        {
-            while (a != 0 && b != 0)
-            {
-                if (a > b) a %= b;
-                else b %= a;
-            }
-
-            return Math.Max(a, b);
-        }
-
-        private static bool IsPrime(int number)
-        {
-            if ((number & 1) == 0) return number == 2;
-
-            int limit = (int)Math.Sqrt(number);
-
-            for (int i = 3; i <= limit; i += 2)
-            {
-                if (number % i == 0) return false;
-            }
-
-            return true;
         }
     }
 }

@@ -11,14 +11,15 @@ namespace DataSecurity.Lab1_5
         {
             var encoders = new List<IEncoder>
             {
-                new RsaAlgorithm(10, 100)
+                new RsaAlgorithm(10, 100),
+                new KnapsackAlgorithm(10)
             };
 
             while (true)
             {
                 Console.Clear();
                 Console.Write("Enter the message: ");
-                string message = Console.ReadLine()?.ToUpper();
+                string message = Console.ReadLine();
                 Console.WriteLine();
 
                 foreach (var encoder in encoders)
