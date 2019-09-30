@@ -9,7 +9,7 @@ using DataSecurity.Lab1_5.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_5.Encoders.Implementations
 {
-    class KnapsackAlgorithm : BaseEncoder, IEncoder
+    class KnapsackAlgorithm : IEncoder
     {
         public string Name => "Knapsack algorithm";
 

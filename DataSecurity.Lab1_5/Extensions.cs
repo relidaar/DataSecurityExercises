@@ -47,5 +47,14 @@ namespace DataSecurity.Lab1_5
 
             return true;
         }
+
+        public static int GetPrime(int max, int min = 1)
+        {
+            var rnd = new Random();
+            int number = rnd.Next(min, max);
+            while (!number.IsPrime()) number = rnd.Next(min, max);
+
+            return number;
+        }
     }
 }

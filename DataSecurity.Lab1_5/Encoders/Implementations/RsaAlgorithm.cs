@@ -7,7 +7,7 @@ using DataSecurity.Lab1_5.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_5.Encoders.Implementations
 {
-    class RsaAlgorithm : BaseEncoder, IEncoder
+    class RsaAlgorithm : IEncoder
     {
         public string Name => "Rsa algorithm";
 
@@ -36,11 +36,7 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
             GenerateKey();
 
             string result = "";
-            foreach (var symbol in message)
-            {
-                var index = (int)symbol;
-                result += BigInteger.Pow(index, _e) % _n + " ";
-            }
+            foreach (var symbol in message.Select(x => (int) x)) result += BigInteger.Pow(symbol, _e) % _n + " ";
 
             return result.Trim();
         }
@@ -62,22 +58,13 @@ namespace DataSecurity.Lab1_5.Encoders.Implementations
 
         private void GenerateKey()
         {
-            _p = GetPrime();
-            _q = GetPrime();
+            _p = Extensions.GetPrime(_upperBound);
+            _q = Extensions.GetPrime(_upperBound);
 
             _n = _p * _q;
             _m = (_p - 1) * (_q - 1);
             _d = GetD();
             _e = GetE();
-        }
-
-        private int GetPrime()
-        {
-            var rnd = new Random();
-            int number = rnd.Next(_lowerBound, _upperBound);
-            while (!number.IsPrime()) number = rnd.Next(_lowerBound, _upperBound);
-
-            return number;
         }
 
         private int GetD()
