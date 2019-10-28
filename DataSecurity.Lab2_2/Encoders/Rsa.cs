@@ -21,8 +21,8 @@ namespace DataSecurity.Lab2_2.Encoders
 
         public void GenerateKeys()
         {
-            var p = Extensions.GetPrime(_upperBound);
-            var q = Extensions.GetPrime(_upperBound);
+            var p = Extensions.GetPrime(_upperBound, _lowerBound);
+            var q = Extensions.GetPrime(_upperBound, _lowerBound);
 
             n = p * q;
 

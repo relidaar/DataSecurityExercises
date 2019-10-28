@@ -42,18 +42,18 @@ namespace DataSecurity.Lab2_2.Encoders
 
         private int GetG()
         {
-            int g = 0;
-            while ((int)Math.Pow(g, _q) % p != 1) g++;
+            int value = new Random().Next(0, 10);
+            while (BigInteger.Pow(value, _q) % p != 1) value++;
 
-            return g;
+            return value;
         }
 
         private int GetY()
         {
-            int y = 1;
-            while ((int)Math.Pow(g, _x) * y % p != 1) y++;
+            int value = 1;
+            while (BigInteger.Pow(g, _x) * value % p != 1) value++;
 
-            return y;
+            return value;
         }
 
         public void GenerateK() => _k = new Random().Next(1, _q);

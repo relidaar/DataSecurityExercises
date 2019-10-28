@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace DataSecurity.Lab2_2.Encoders
 {
@@ -40,8 +41,8 @@ namespace DataSecurity.Lab2_2.Encoders
 
         public void GenerateKeys()
         {
-            var p = Extensions.GetPrime(_upperBound);
-            var q = Extensions.GetPrime(_upperBound);
+            var p = Extensions.GetPrime(_upperBound, _lowerBound);
+            var q = Extensions.GetPrime(_upperBound, _lowerBound);
 
             n = p * q;
 
@@ -57,7 +58,7 @@ namespace DataSecurity.Lab2_2.Encoders
             int x = new Random().Next(1, n + 1);
             while (true)
             {
-                if (value == (int) Math.Pow(x, 2) % n && GetInverse(value) != 0) break;
+                if (value == BigInteger.Pow(x, 2) % n && GetInverse(value) != 0) break;
 
                 value++;
             }
@@ -75,10 +76,10 @@ namespace DataSecurity.Lab2_2.Encoders
 
         private int GetS(int inverse)
         {
-            int s = 1;
-            while ((int)Math.Pow(s, 2) % n != inverse) s++;
+            int value = 1;
+            while (BigInteger.Pow(value, 2) % n != inverse) value++;
 
-            return s;
+            return value;
         }
     }
 }
