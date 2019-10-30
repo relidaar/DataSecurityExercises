@@ -38,6 +38,8 @@ namespace DataSecurity.Lab2_2.Encoders
             _x = new Random().Next(1, _q - 1);
             g = GetG();
             y = GetY();
+
+            Console.WriteLine($"p = {p}, q = {_q}, g = {g}, y = {y}, x = {_x}");
         }
 
         private int GetG()

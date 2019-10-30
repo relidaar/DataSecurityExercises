@@ -29,6 +29,8 @@ namespace DataSecurity.Lab2_2.Encoders
             int m = (p - 1) * (q - 1);
             e = GetE(m);
             _d = GetD(m);
+
+            Console.WriteLine($"p = {p}, q = {q}, n = {n}, m = {m}, e = {e}, d = {_d}");
         }
 
         public void CalculateK(BigInteger r) => k = BigInteger.Pow(r, _d) % n;

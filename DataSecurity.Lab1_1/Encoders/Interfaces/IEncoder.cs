@@ -2,8 +2,7 @@
 {
     public interface IEncoder
     {
-        string Name { get; }
-        string Encrypt(string message);
-        string Decrypt(string encryptedMessage);
+        string Encode(string message);
+        string Decode(string encryptedMessage);
     }
 }

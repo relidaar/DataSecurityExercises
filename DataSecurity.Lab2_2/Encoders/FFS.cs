@@ -50,6 +50,8 @@ namespace DataSecurity.Lab2_2.Encoders
             var inverse = GetInverse(v);
 
             s = GetS(inverse);
+
+            Console.WriteLine($"p = {p}, q = {q}, v = {v}, n = {n}, s = {s}, s^-1 = {inverse}");
         }
 
         private int GetV()

@@ -19,7 +19,6 @@ namespace DataSecurity.Lab2_2
             var b = new RsaReceiver();
 
             a.GenerateKeys();
-            b.GenerateK(a.n);
 
             b.CalculateR(a.e, a.n);
             a.CalculateK(b.r);
@@ -33,12 +32,11 @@ namespace DataSecurity.Lab2_2
 
         static void Schnorr()
         {
-            Console.WriteLine("Schnorr");
+            Console.WriteLine("\nSchnorr");
             var a = new SchnorrSender(150, 1000);
             var b = new SchnorrReceiver(10);
 
             a.GenerateKeys();
-            a.GenerateK();
             b.GenerateE();
 
             a.CalculateR();
@@ -54,13 +52,12 @@ namespace DataSecurity.Lab2_2
 
         static void Ffs()
         {
-            Console.WriteLine("FFS");
+            Console.WriteLine("\nFFS");
             var provider = new FfsProvider(150, 1000);
             var a = new FfsSender();
             var b = new FfsReceiver();
 
             provider.GenerateKeys();
-            a.GenerateR(provider.n);
 
             a.CalculateY(provider.n, provider.s);
 
