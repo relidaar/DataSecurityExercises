@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using DataSecurity.Lab1_2.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_2.Encoders.Implementations
 {
-    public class MagicSquare : IEncoder
+    public class MagicSquareEncoder : IEncoder
     {
         private readonly int[,] _key = { { 16, 3, 2, 13 }, { 9, 6, 7, 12 }, { 5, 10, 11, 8 }, { 4, 15, 14, 1 } };
 
-        private static char _placeholder = '*';
+        private const char Placeholder = '*';
 
-        public string Name => "Magic square";
-        
-        public string Encrypt(string message)
+        public string Encode(string message)
         {
-            if (string.IsNullOrEmpty(message)) return null;
+            if (message == null) throw new NullReferenceException();
 
-            message = message.ToUpper().Replace(" ", "");
-            while (message.Length % 16 != 0) message += _placeholder;
+            message = message.Replace(" ", "");
+            while (message.Length % 16 != 0) message += Placeholder;
 
             var messageBlocks = CreateMessageBlocks(message, 16);
 
-            string result = "";
+            var result = new StringBuilder();
             foreach (var messageBlock in messageBlocks)
             {
                 var block = CreateEncryptedBlock(messageBlock);
@@ -30,21 +29,21 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        result += block[i, j];
+                        result.Append(block[i, j]);
                     }
                 }
             }
 
-            return result;
+            return result.ToString();
         }
 
-        public string Decrypt(string encryptedMessage)
+        public string Decode(string encryptedMessage)
         {
-            if (string.IsNullOrEmpty(encryptedMessage)) return null;
+            if (encryptedMessage == null) throw new NullReferenceException();
 
             var messageBlocks = CreateMessageBlocks(encryptedMessage, 16);
 
-            string result = "";
+            var result = new StringBuilder();
             foreach (var messageBlock in messageBlocks)
             {
                 var block = CreateEncryptedBlock(messageBlock);
@@ -52,12 +51,12 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        result += block[i, j];
+                        result.Append(block[i, j]);
                     }
                 }
             }
 
-            return result.Trim(_placeholder);
+            return result.ToString().Trim(Placeholder);
         }
 
         private char[,] CreateEncryptedBlock(string messageBlock)
@@ -70,11 +69,10 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        if (_key[i, j] == index + 1 && index != messageBlock.Length)
-                        {
-                            block[i, j] = messageBlock[index];
-                            index++;
-                        }
+                        if (_key[i, j] != index + 1 || index == messageBlock.Length) continue;
+
+                        block[i, j] = messageBlock[index];
+                        index++;
                     }
                 }
             }
@@ -82,23 +80,15 @@ namespace DataSecurity.Lab1_2.Encoders.Implementations
             return block;
         }
 
-        private string[] CreateMessageBlocks(string message, int n)
+        private static IEnumerable<string> CreateMessageBlocks(string message, int n)
         {
-            var blocks = new List<string>();
-
             for (var i = 0; i < message.Length; i += n)
             {
-                string str = "";
+                var str = new StringBuilder();
+                for (int j = i; j < i + n; j++) str.Append(message[j]);
 
-                for (int j = i; j < i + n; j++)
-                {
-                    str += message[j];
-                }
-
-                blocks.Add(str);
+                yield return str.ToString();
             }
-
-            return blocks.ToArray();
         }
     }
 }
