@@ -5,13 +5,16 @@ using DataSecurity.Lab1_1.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_1.Encoders.Implementations
 {
-    internal class PolybiusEncoder : BaseEncoder, IEncoder
+    internal class PolybiusEncoder : IEncoder
     {
         private readonly char[,] _matrix;
+        private readonly string _characters;
 
         public PolybiusEncoder(string keyword)
         {
             if (keyword == null) throw new NullReferenceException();
+
+            _characters = string.Join("", Extensions.GenerateAlphabet(26, 65).ToArray());
 
             keyword = keyword.ToUpper().Replace("J", "I").Replace(" ", "");
 
@@ -19,7 +22,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             keyword = string.Join(string.Empty, keyword.ToCharArray().Distinct());
 
             // Create key from keyword and alphabet without duplicates
-            var key = keyword + string.Join("", Characters.Except(keyword)).Replace("J", "");
+            var key = keyword + string.Join("", _characters.Except(keyword)).Replace("J", "");
 
             _matrix = CreateMatrix(key);
         }
@@ -29,7 +32,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             if (message == null) throw new NullReferenceException();
 
             var result = new StringBuilder();
-            foreach (var symbol in message.ToUpper().Replace("J", "I").Where(c => Characters.Contains(c)))
+            foreach (var symbol in message.ToUpper().Replace("J", "I").Where(c => _characters.Contains(c)))
                 for (var i = 0; i < 5; i++)
                 for (var j = 0; j < 5; j++)
                 {

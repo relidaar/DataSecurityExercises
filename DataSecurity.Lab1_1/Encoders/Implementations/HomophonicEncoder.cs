@@ -6,15 +6,17 @@ using DataSecurity.Lab1_1.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_1.Encoders.Implementations
 {
-    internal class HomophonicEncoder : BaseEncoder, IEncoder
+    internal class HomophonicEncoder : IEncoder
     {
         private readonly int[] _frequencies;
         private readonly IList<int[]> _key;
+        private readonly string _characters;
 
         public HomophonicEncoder(int[] frequencies)
         {
             _frequencies = frequencies ?? throw new NullReferenceException();
-            _key = GetKey();
+            _key = GetKey().ToList();
+            _characters = string.Join("", Extensions.GenerateAlphabet(94, 32).ToArray());
         }
 
         public string Encode(string message)
@@ -23,9 +25,9 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
 
             var result = new StringBuilder();
             var rnd = new Random();
-            foreach (var symbol in message.ToUpper().Where(c => Characters.Contains(c)))
+            foreach (var symbol in message)
             {
-                var index = Characters.IndexOf(symbol);
+                var index = _characters.IndexOf(symbol);
                 var secondIndex = rnd.Next(0, _frequencies[index]);
 
                 result.Append(_key[index][secondIndex] + " ");
@@ -43,16 +45,15 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             {
                 var el = _key.First(x => x.Contains(value));
                 var index = _key.IndexOf(el);
-                result.Append(Characters[index]);
+                result.Append(_characters[index]);
             }
 
             return result.ToString();
         }
 
-        private IList<int[]> GetKey()
+        private IEnumerable<int[]> GetKey()
         {
             var rnd = new Random();
-            var key = new List<int[]>();
             var used = new List<int>();
             foreach (var frequency in _frequencies)
             {
@@ -67,10 +68,8 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
                 }
 
                 Array.Sort(symbols);
-                key.Add(symbols);
+                yield return symbols;
             }
-
-            return key;
         }
     }
 }

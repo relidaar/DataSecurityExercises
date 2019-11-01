@@ -5,15 +5,15 @@ using DataSecurity.Lab1_1.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_1.Encoders.Implementations
 {
-    internal class VigenereEncoder : BaseEncoder, IEncoder
+    internal class VigenereEncoder : IEncoder
     {
         private readonly string _keyword;
+        private readonly string _characters;
 
         public VigenereEncoder(string keyword)
         {
-            if (keyword == null) throw new NullReferenceException();
-
-            _keyword = keyword.ToUpper().Replace(" ", "");
+            _keyword = keyword ?? throw new NullReferenceException();
+            _characters = string.Join("", Extensions.GenerateAlphabet(94, 32).ToArray());
         }
 
         public string Encode(string message)
@@ -23,12 +23,12 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             var keywordIndex = 0;
 
             var result = new StringBuilder();
-            foreach (var symbol in message.ToUpper().Where(c => Characters.Contains(c)))
+            foreach (var symbol in message)
             {
-                var index = (Characters.IndexOf(symbol) + Characters.IndexOf(_keyword[keywordIndex]))
-                    .Mod(Characters.Length);
+                var index = (_characters.IndexOf(symbol) + _characters.IndexOf(_keyword[keywordIndex]))
+                    .Mod(_characters.Length);
 
-                result.Append(Characters[index]);
+                result.Append(_characters[index]);
                 keywordIndex++;
 
                 if (keywordIndex + 1 == _keyword.Length) keywordIndex = 0;
@@ -44,12 +44,12 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             var keywordIndex = 0;
 
             var result = new StringBuilder();
-            foreach (var symbol in encryptedMessage.ToUpper().Where(c => Characters.Contains(c)))
+            foreach (var symbol in encryptedMessage)
             {
-                var index = (Characters.IndexOf(symbol) - Characters.IndexOf(_keyword[keywordIndex]))
-                    .Mod(Characters.Length);
+                var index = (_characters.IndexOf(symbol) - _characters.IndexOf(_keyword[keywordIndex]))
+                    .Mod(_characters.Length);
 
-                result.Append(Characters[index]);
+                result.Append(_characters[index]);
                 keywordIndex++;
 
                 if (keywordIndex + 1 == _keyword.Length) keywordIndex = 0;

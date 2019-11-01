@@ -6,13 +6,16 @@ using DataSecurity.Lab1_1.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_1.Encoders.Implementations
 {
-    internal class PlayfairEncoder : BaseEncoder, IEncoder
+    internal class PlayfairEncoder : IEncoder
     {
         private readonly char[,] _matrix;
+        private readonly string _characters;
 
         public PlayfairEncoder(string keyword)
         {
             if (keyword == null) throw new NullReferenceException();
+
+            _characters = string.Join("", Extensions.GenerateAlphabet(26, 65).ToArray());
 
             keyword = keyword.ToUpper().Replace(" ", "");
 
@@ -20,9 +23,11 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             keyword = string.Join(string.Empty, keyword.ToCharArray().Distinct());
 
             // Create key from keyword and alphabet without duplicates
-            var key = keyword + string.Join("", Characters.Except(keyword)).Replace("J", "");
+            var key = keyword + string.Join("", _characters.Except(keyword)).Replace("J", "");
 
             _matrix = CreateMatrix(key);
+
+            _characters = string.Join("", Extensions.GenerateAlphabet(94, 32).ToArray());
         }
 
         public string Encode(string message)
@@ -32,7 +37,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             var pairs = CreatePairs(message.ToUpper().Replace("J", "I"));
 
             var result = new StringBuilder();
-            foreach (var pair in pairs.Where(p => Characters.Contains(p[0]) && Characters.Contains(p[1])))
+            foreach (var pair in pairs.Where(p => _characters.Contains(p[0]) && _characters.Contains(p[1])))
             {
                 var first = GetCoordinates(pair[0]);
                 var second = GetCoordinates(pair[1]);
@@ -56,7 +61,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             var pairs = CreatePairs(encryptedMessage.ToUpper().Replace("J", "I"));
 
             var result = new StringBuilder();
-            foreach (var pair in pairs.Where(p => Characters.Contains(p[0]) && Characters.Contains(p[1])))
+            foreach (var pair in pairs.Where(p => _characters.Contains(p[0]) && _characters.Contains(p[1])))
             {
                 var first = GetCoordinates(pair[0]);
                 var second = GetCoordinates(pair[1]);

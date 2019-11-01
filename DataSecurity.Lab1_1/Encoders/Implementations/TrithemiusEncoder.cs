@@ -5,11 +5,12 @@ using DataSecurity.Lab1_1.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_1.Encoders.Implementations
 {
-    internal class TrithemiusEncoder : BaseEncoder, IEncoder
+    internal class TrithemiusEncoder : IEncoder
     {
         private readonly int _a;
         private readonly int _b;
         private readonly int _c;
+        private readonly string _characters;
 
         public TrithemiusEncoder(int a, int b, int c)
         {
@@ -18,6 +19,7 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             _a = a;
             _b = b;
             _c = c;
+            _characters = string.Join("", Extensions.GenerateAlphabet(94, 32).ToArray());
         }
 
         public string Encode(string message)
@@ -25,12 +27,12 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             if (message == null) throw new NullReferenceException();
 
             var result = new StringBuilder();
-            foreach (var symbol in message.ToUpper().Where(c => Characters.Contains(c)))
+            foreach (var symbol in message)
             {
-                var index = (Characters.IndexOf(symbol) + GetShift(message.IndexOf(symbol)))
-                    .Mod(Characters.Length);
+                var index = (_characters.IndexOf(symbol) + GetShift(message.IndexOf(symbol)))
+                    .Mod(_characters.Length);
 
-                result.Append(Characters[index]);
+                result.Append(_characters[index]);
             }
 
             return result.ToString();
@@ -41,20 +43,17 @@ namespace DataSecurity.Lab1_1.Encoders.Implementations
             if (encryptedMessage == null) throw new NullReferenceException();
 
             var result = new StringBuilder();
-            foreach (var symbol in encryptedMessage.ToUpper().Where(c => Characters.Contains(c)))
+            foreach (var symbol in encryptedMessage)
             {
-                var index = (Characters.IndexOf(symbol) - GetShift(encryptedMessage.IndexOf(symbol)))
-                    .Mod(Characters.Length);
+                var index = (_characters.IndexOf(symbol) - GetShift(encryptedMessage.IndexOf(symbol)))
+                    .Mod(_characters.Length);
 
-                result.Append(Characters[index]);
+                result.Append(_characters[index]);
             }
 
             return result.ToString();
         }
 
-        private int GetShift(int p)
-        {
-            return _a * p * p + _b * p + _c;
-        }
+        private int GetShift(int p) => _a * p * p + _b * p + _c;
     }
 }

@@ -9,6 +9,12 @@ namespace DataSecurity.Lab1_1
     {
         private static void Main(string[] args)
         {
+            var rnd = new Random();
+            var frequencies = new int[94];
+            for (int i = 0; i < 94; i++)
+            {
+                frequencies[i] = rnd.Next(0, 20);
+            }
             var encoders = new Dictionary<string, IEncoder>
             {
                 {"Caesar cipher", new CaesarEncoder(3)},
@@ -17,20 +23,14 @@ namespace DataSecurity.Lab1_1
                 {"Trithemius cipher", new TrithemiusEncoder(2, 5, 3)},
                 {"Vigenere cipher", new VigenereEncoder("secret")},
                 {"Playfair cipher", new PlayfairEncoder("secret")},
-                {
-                    "Homophonic cipher",
-                    new HomophonicEncoder(new[]
-                    {
-                        8, 2, 3, 4, 12, 2, 2, 6, 6, 1, 1, 4, 2, 6, 7, 2, 1, 6, 6, 9, 3, 1, 2, 1, 2, 1
-                    })
-                }
+                {"Homophonic cipher", new HomophonicEncoder(frequencies)}
             };
 
             while (true)
             {
                 Console.Clear();
                 Console.Write("Enter the message: ");
-                var message = Console.ReadLine()?.ToUpper();
+                var message = Console.ReadLine();
                 Console.WriteLine();
 
                 foreach (var (encoderName, encoder) in encoders)
