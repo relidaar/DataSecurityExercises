@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using DataSecurity.Lab1_2.Encoders.Interfaces;
 using static System.String;
 
 namespace DataSecurity.Lab1_2.Encoders.Implementations

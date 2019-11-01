@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using DataSecurity.Lab1_2.Encoders;
 using DataSecurity.Lab1_2.Encoders.Implementations;
-using DataSecurity.Lab1_2.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
