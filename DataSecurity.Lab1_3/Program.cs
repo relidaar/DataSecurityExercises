@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataSecurity.Lab1_3.Encoders;
+using DataSecurity.Lab1_3.Encoders.Implementations;
 using DataSecurity.Lab1_3.Encoders.Interfaces;
 
 namespace DataSecurity.Lab1_3
@@ -9,25 +10,24 @@ namespace DataSecurity.Lab1_3
     {
         static void Main(string[] args)
         {
-            var factory = new EncoderFactory();
-            var encoders = new List<IEncoder>
+            var encoders = new Dictionary<string, IEncoder>
             {
-                factory.UseGammaCipher(),
-                factory.UseXorCipher()
+                {"Gamma cipher", new GammaEncoder(10) },
+                {"XOR cipher", new XorEncoder(10) }
             };
 
             while (true)
             {
                 Console.Clear();
                 Console.Write("Enter the message: ");
-                string message = Console.ReadLine()?.ToUpper();
+                string message = Console.ReadLine();
                 Console.WriteLine();
 
-                foreach (var encoder in encoders)
+                foreach (var (encoderName, encoder) in encoders)
                 {
-                    var encrypted = encoder.Encrypt(message) ?? "Error";
-                    var decrypted = encoder.Decrypt(encrypted) ?? "Error";
-                    Console.WriteLine($"{encoder.Name}: {encrypted} ({decrypted})\n");
+                    var encrypted = encoder.Encode(message) ?? "Error";
+                    var decrypted = encoder.Decode(encrypted) ?? "Error";
+                    Console.WriteLine($"{encoderName}: {encrypted} ({decrypted})\n");
                 }
 
                 Console.Write("\nContinue? (y/n): ");
