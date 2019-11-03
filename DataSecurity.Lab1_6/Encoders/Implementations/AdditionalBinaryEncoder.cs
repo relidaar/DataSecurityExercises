@@ -15,17 +15,9 @@ namespace DataSecurity.Lab1_6.Encoders.Implementations
 
             if (num >= 0) return result;
 
-            for (var i = 0; i < result.Length; i++)
-            {
-                var digit = result[i];
+            result = Convert.ToString(~Convert.ToInt32(result, 2) + 1, 2);
 
-                if (digit == '0') result = result.ReplaceAt(i, '1');
-                else if (digit == '1') result = result.ReplaceAt(i, '0');
-            }
-
-            result = Convert.ToString(Convert.ToInt32(result, 2) + 1, 2);
-
-            return result;
+            return result.Substring(result.Length - 8);
         }
 
         public string Decode(string encryptedNumber)
