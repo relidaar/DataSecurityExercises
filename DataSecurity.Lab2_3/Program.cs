@@ -9,6 +9,10 @@ namespace DataSecurity.Lab2_3
         {
             Console.Write("Enter message: ");
             var input = Console.ReadLine();
+
+            Rsa(input);
+            Gost94(input);
+            Gost01(input);
         }
 
         static void Rsa(string input)
@@ -52,6 +56,38 @@ namespace DataSecurity.Lab2_3
             var result = b.Check(a.w);
 
             Console.WriteLine($"result: w' = u {result}");
+        }
+
+        static void Gost01(string input)
+        {
+            Console.WriteLine("\nGost01");
+            var a = new Gost01Sender(new ECPoint(7, 17, 3, 7, 41, 47));
+            var b = new Gost01Receiver();
+
+            Console.WriteLine("A: ");
+            a.GenerateKeys();
+            a.CalculateH(input);
+            a.CalculateE();
+            while (a.s == 0 || a.r == 0)
+            {
+                a.GenerateK();
+                a.CalculatePointC();
+                a.CalculateR();
+                a.CalculateS();
+            }
+            Console.WriteLine($"r = {a.r}, s = {a.s}");
+
+            Console.WriteLine("\nB: ");
+            b.CalculateH(input);
+            b.CalculateE(a.p1.Q);
+            b.CalculateV(a.p1.Q);
+            b.CalculateZ(a.s, a.r, a.p1.Q);
+            b.CalculatePointC(a.p1, a.p2);
+            b.CalculateR();
+            var result = b.Check(a.r);
+
+            Console.WriteLine($"result: r' = r {result}");
+
         }
     }
 }

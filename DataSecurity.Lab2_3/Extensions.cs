@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace DataSecurity.Lab2_3
 {
@@ -13,6 +14,14 @@ namespace DataSecurity.Lab2_3
             }
 
             return Math.Max(a, b);
+        }
+
+        public static int GetInverse(this int value, int n)
+        {
+            int inverse = 0;
+            while (inverse * value % n != 1) inverse++;
+
+            return inverse;
         }
 
         public static bool IsPrime(this int number)
@@ -37,5 +46,7 @@ namespace DataSecurity.Lab2_3
 
             return number;
         }
+
+        public static int Mod(this int x, int m) => (x % m + m) % m;
     }
 }
