@@ -2,7 +2,7 @@
 using System.Text;
 using DataSecurity.Interfaces;
 
-namespace DataSecurity.Implementations.Lab1_2
+namespace DataSecurity.Lab1_2
 {
     class RouteEncoder : IEncoder
     {

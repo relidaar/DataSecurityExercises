@@ -4,7 +4,7 @@ using System.Text;
 using DataSecurity.Interfaces;
 using static System.String;
 
-namespace DataSecurity.Implementations.Lab1_2
+namespace DataSecurity.Lab1_2
 {
     class GrilleEncoder : IEncoder
     {
