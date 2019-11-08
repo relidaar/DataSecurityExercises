@@ -7,7 +7,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_1
 {
-    internal class HomophonicEncoder : IEncoder
+    public class HomophonicEncoder : IEncoder
     {
         private readonly string _characters;
         private readonly int[] _frequencies;

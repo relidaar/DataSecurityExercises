@@ -7,7 +7,7 @@ using DataSecurity.Extensions;
 
 namespace DataSecurity.Lab2_3
 {
-    internal class Gost94Sender
+    public class Gost94Sender
     {
         private readonly int _lowerBound;
         private readonly int _upperBound;
@@ -73,7 +73,7 @@ namespace DataSecurity.Lab2_3
         }
     }
 
-    internal class Gost94Receiver
+    public class Gost94Receiver
     {
         private BigInteger _h = 19229;
         private int _u;

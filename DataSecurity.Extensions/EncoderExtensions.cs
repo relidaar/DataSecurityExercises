@@ -27,10 +27,11 @@ namespace DataSecurity.Extensions
             return GetBinary(value) + remainder;
         }
 
-        public static string GetBinary(this string data, int width = 8)
+        public static string GetBinary(this string data, int width = 8, string separator = "")
         {
             var result = new StringBuilder();
-            foreach (var c in data.ToCharArray()) result.Append(Convert.ToString(c, 2).PadLeft(width, '0'));
+            foreach (var c in data.ToCharArray()) 
+                result.Append(Convert.ToString(c, 2).PadLeft(width, '0') + separator);
 
             return result.ToString();
         }

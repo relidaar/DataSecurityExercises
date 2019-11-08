@@ -8,7 +8,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_5
 {
-    internal class KnapsackAlgorithm : IEncoder
+    public class KnapsackAlgorithm : IEncoder
     {
         private int _m;
         private int _n;
@@ -40,7 +40,7 @@ namespace DataSecurity.Lab1_5
         {
             if (encryptedMessage == null) throw new NullReferenceException();
 
-            var values = encryptedMessage.Split(" ")
+            var values = encryptedMessage.Split(' ')
                 .Select(x => Convert.ToInt32((BigInteger.Parse(x) * _n1 % _m).ToString())).ToList();
 
             var result = new StringBuilder();

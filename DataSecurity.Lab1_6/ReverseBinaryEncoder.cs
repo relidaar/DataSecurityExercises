@@ -4,7 +4,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_6
 {
-    internal class ReverseBinaryEncoder : IEncoder
+    public class ReverseBinaryEncoder : IEncoder
     {
         public string Encode(string number)
         {

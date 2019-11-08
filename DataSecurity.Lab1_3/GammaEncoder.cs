@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_3
 {
-    internal class GammaEncoder : IEncoder
+    public class GammaEncoder : IEncoder
     {
         private readonly string _characters;
         private readonly int[] _gamma;

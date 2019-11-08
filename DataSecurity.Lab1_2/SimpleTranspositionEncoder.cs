@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
-    internal class SimpleTranspositionEncoder : IEncoder
+    public class SimpleTranspositionEncoder : IEncoder
     {
         private int[] _key;
 

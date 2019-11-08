@@ -7,7 +7,7 @@ using DataSecurity.Extensions;
 
 namespace DataSecurity.Lab2_3
 {
-    internal class Gost01Sender
+    public class Gost01Sender
     {
         private ECPoint _c;
         private int _d;
@@ -67,7 +67,7 @@ namespace DataSecurity.Lab2_3
         }
     }
 
-    internal class Gost01Receiver
+    public class Gost01Receiver
     {
         private ECPoint _c;
         private int _e;

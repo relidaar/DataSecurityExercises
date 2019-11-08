@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_1
 {
-    internal class PolybiusEncoder : IEncoder
+    public class PolybiusEncoder : IEncoder
     {
         private readonly string _characters;
         private readonly char[,] _matrix;

@@ -3,27 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Interfaces", "DataSecurity.Interfaces\DataSecurity.Interfaces.csproj", "{423334F5-2796-4C86-89D6-58FF2222AEB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Interfaces", "DataSecurity.Interfaces\DataSecurity.Interfaces.csproj", "{423334F5-2796-4C86-89D6-58FF2222AEB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Extensions", "DataSecurity.Extensions\DataSecurity.Extensions.csproj", "{DFA1F85C-CC88-4E7D-8916-350D9442B942}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Extensions", "DataSecurity.Extensions\DataSecurity.Extensions.csproj", "{DFA1F85C-CC88-4E7D-8916-350D9442B942}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_1", "DataSecurity.Lab1_1\DataSecurity.Lab1_1.csproj", "{23223B86-2FC1-4DA0-906F-956035CFAE1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_1", "DataSecurity.Lab1_1\DataSecurity.Lab1_1.csproj", "{23223B86-2FC1-4DA0-906F-956035CFAE1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_2", "DataSecurity.Lab1_2\DataSecurity.Lab1_2.csproj", "{E527320A-26DC-450F-B492-24CE37F320DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_2", "DataSecurity.Lab1_2\DataSecurity.Lab1_2.csproj", "{E527320A-26DC-450F-B492-24CE37F320DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_3", "DataSecurity.Lab1_3\DataSecurity.Lab1_3.csproj", "{163FDF4A-7589-40A4-86C6-5B9C26110F5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_3", "DataSecurity.Lab1_3\DataSecurity.Lab1_3.csproj", "{163FDF4A-7589-40A4-86C6-5B9C26110F5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_4", "DataSecurity.Lab1_4\DataSecurity.Lab1_4.csproj", "{E0E98E5C-C385-4BF6-A7D1-18E915D92AD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_4", "DataSecurity.Lab1_4\DataSecurity.Lab1_4.csproj", "{E0E98E5C-C385-4BF6-A7D1-18E915D92AD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_5", "DataSecurity.Lab1_5\DataSecurity.Lab1_5.csproj", "{DD49078F-31BA-4CE9-AAC0-DF94E264F4DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_5", "DataSecurity.Lab1_5\DataSecurity.Lab1_5.csproj", "{DD49078F-31BA-4CE9-AAC0-DF94E264F4DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab1_6", "DataSecurity.Lab1_6\DataSecurity.Lab1_6.csproj", "{E210372A-D8A1-4C13-A950-3A7076886A7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab1_6", "DataSecurity.Lab1_6\DataSecurity.Lab1_6.csproj", "{E210372A-D8A1-4C13-A950-3A7076886A7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab2_1", "DataSecurity.Lab2_1\DataSecurity.Lab2_1.csproj", "{D9DD7517-88E1-4A99-956B-8377848533CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab2_1", "DataSecurity.Lab2_1\DataSecurity.Lab2_1.csproj", "{D9DD7517-88E1-4A99-956B-8377848533CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab2_2", "DataSecurity.Lab2_2\DataSecurity.Lab2_2.csproj", "{B6E39BC1-C2F2-4B1A-AF84-2FAD6A984356}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab2_2", "DataSecurity.Lab2_2\DataSecurity.Lab2_2.csproj", "{B6E39BC1-C2F2-4B1A-AF84-2FAD6A984356}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab2_3", "DataSecurity.Lab2_3\DataSecurity.Lab2_3.csproj", "{301ECB51-0686-4A76-A6E3-11D33899D5E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSecurity.Lab2_3", "DataSecurity.Lab2_3\DataSecurity.Lab2_3.csproj", "{301ECB51-0686-4A76-A6E3-11D33899D5E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.Lab2_4", "DataSecurity.Lab2_4\DataSecurity.Lab2_4.csproj", "{CA4E1298-1659-49FF-AFC6-0157CA165E8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSecurity.LabTest", "DataSecurity.LabTest\DataSecurity.LabTest.csproj", "{4768C055-A118-47EA-A423-BB5C9FCFE06C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,14 @@ Global
 		{301ECB51-0686-4A76-A6E3-11D33899D5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{301ECB51-0686-4A76-A6E3-11D33899D5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{301ECB51-0686-4A76-A6E3-11D33899D5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA4E1298-1659-49FF-AFC6-0157CA165E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA4E1298-1659-49FF-AFC6-0157CA165E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA4E1298-1659-49FF-AFC6-0157CA165E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA4E1298-1659-49FF-AFC6-0157CA165E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4768C055-A118-47EA-A423-BB5C9FCFE06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4768C055-A118-47EA-A423-BB5C9FCFE06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4768C055-A118-47EA-A423-BB5C9FCFE06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4768C055-A118-47EA-A423-BB5C9FCFE06C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

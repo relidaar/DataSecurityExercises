@@ -8,7 +8,7 @@ using static System.String;
 
 namespace DataSecurity.Lab1_4
 {
-    internal class AdfgvxCipher : IEncoder
+    public class AdfgvxCipher : IEncoder
     {
         private const string Key = "ADFGVX";
         private const char Placeholder = '*';

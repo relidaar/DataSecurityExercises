@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_1
 {
-    internal class CaesarEncoder : IEncoder
+    public class CaesarEncoder : IEncoder
     {
         private readonly string _characters;
         private readonly int _shift;

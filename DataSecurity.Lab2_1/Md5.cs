@@ -4,7 +4,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab2_1
 {
-    internal class HashMd5 : IEncoder
+    public class HashMd5 : IEncoder
     {
         private readonly List<Func<uint, uint, uint, uint>> _functions = new List<Func<uint, uint, uint, uint>>
         {

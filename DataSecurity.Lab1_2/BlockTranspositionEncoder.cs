@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
-    internal class BlockTranspositionEncoder : IEncoder
+    public class BlockTranspositionEncoder : IEncoder
     {
         private readonly int _blockSize;
         private List<int[]> _key;

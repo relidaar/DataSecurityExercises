@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
-    internal class DoubleTranspositionEncoder : IEncoder
+    public class DoubleTranspositionEncoder : IEncoder
     {
         private const char Placeholder = '*';
         private readonly int _numberOfColumns;

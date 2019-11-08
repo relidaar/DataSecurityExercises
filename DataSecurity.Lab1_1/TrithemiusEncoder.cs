@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_1
 {
-    internal class TrithemiusEncoder : IEncoder
+    public class TrithemiusEncoder : IEncoder
     {
         private readonly int _a;
         private readonly int _b;

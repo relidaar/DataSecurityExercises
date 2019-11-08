@@ -6,7 +6,7 @@ using static System.String;
 
 namespace DataSecurity.Lab1_2
 {
-    internal class GrilleEncoder : IEncoder
+    public class GrilleEncoder : IEncoder
     {
         private const char Placeholder = '*';
 

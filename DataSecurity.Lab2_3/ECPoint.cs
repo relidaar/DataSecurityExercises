@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using DataSecurity.Extensions;
 
 namespace DataSecurity.Lab2_3
 {
-    internal class ECPoint
+    public class ECPoint
     {
         public ECPoint(int x, int y, int a, int b, int n, int q)
         {

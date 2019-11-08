@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_1
 {
-    internal class SloganEncoder : IEncoder
+    public class SloganEncoder : IEncoder
     {
         private readonly string _characters;
         private readonly string _key;

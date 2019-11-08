@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_3
 {
-    internal class XorEncoder : IEncoder
+    public class XorEncoder : IEncoder
     {
         private readonly int[] _gamma;
 

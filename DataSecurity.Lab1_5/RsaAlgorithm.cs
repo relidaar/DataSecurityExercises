@@ -42,7 +42,7 @@ namespace DataSecurity.Lab1_5
             if (encryptedMessage == null) throw new NullReferenceException();
 
             var result = new StringBuilder();
-            foreach (var symbol in encryptedMessage.Split(" "))
+            foreach (var symbol in encryptedMessage.Split(' '))
             {
                 var number = int.Parse(symbol);
                 var index = Convert.ToInt32((BigInteger.Pow(number, _d) % _n).ToString());

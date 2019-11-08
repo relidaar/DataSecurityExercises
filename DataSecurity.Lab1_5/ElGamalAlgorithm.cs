@@ -8,7 +8,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_5
 {
-    internal class ElGamalAlgorithm : IEncoder
+    public class ElGamalAlgorithm : IEncoder
     {
         private int _g;
         private int _p;
@@ -42,9 +42,9 @@ namespace DataSecurity.Lab1_5
         {
             if (encryptedMessage == null) return null;
 
-            var temp = encryptedMessage.Split(" @@@ ");
-            var listA = temp[0].Split(" ");
-            var listB = temp[1].Split(" ");
+            var temp = encryptedMessage.Split(' ', '@', '@', '@', ' ');
+            var listA = temp[0].Split(' ');
+            var listB = temp[1].Split(' ');
             var encrypted = listA.Zip(listB, (a, b) => new {A = BigInteger.Parse(a), B = BigInteger.Parse(b)});
 
             var result = new StringBuilder();
