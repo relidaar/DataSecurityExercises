@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataSecurity.Extensions\DataSecurity.Extensions.csproj" />
+    <ProjectReference Include="..\DataSecurity.Interfaces\DataSecurity.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
