@@ -1,0 +1,99 @@
+﻿using System;
+using System.Numerics;
+using DataSecurity.Extensions;
+
+namespace DataSecurity.Lab2_2
+{
+    public class SchnorrSender
+    {
+        private readonly int _lowerBound;
+        private readonly int _upperBound;
+        private int _k = 19299;
+        private int _q;
+        private int _x;
+
+        public SchnorrSender(int lowerBound, int upperBound)
+        {
+            _lowerBound = lowerBound;
+            _upperBound = upperBound;
+        }
+
+        public int p { get; private set; }
+
+        public int g { get; private set; }
+        public int y { get; private set; }
+
+        public BigInteger r { get; private set; }
+        public int s { get; private set; }
+
+        public void GenerateKeys()
+        {
+            while (true)
+            {
+                p = MathExtensions.GetPrime(_upperBound, _lowerBound);
+                _q = MathExtensions.GetPrime(_upperBound, _lowerBound);
+
+                if ((p - 1) % _q == 0) break;
+            }
+
+            _x = new Random().Next(1, _q - 1);
+            g = GetG();
+            y = GetY();
+
+            Console.WriteLine($"p = {p}, q = {_q}, g = {g}, y = {y}, x = {_x}");
+        }
+
+        private int GetG()
+        {
+            var value = new Random().Next(0, 10);
+            while (BigInteger.Pow(value, _q) % p != 1) value++;
+
+            return value;
+        }
+
+        private int GetY()
+        {
+            var value = 1;
+            while (BigInteger.Pow(g, _x) * value % p != 1) value++;
+
+            return value;
+        }
+
+        public void GenerateK()
+        {
+            _k = new Random().Next(1, _q);
+        }
+
+        public void CalculateR()
+        {
+            r = BigInteger.Pow(g, _k) % p;
+        }
+
+        public void CalculateS(int e)
+        {
+            s = (_k + _x * e) % _q;
+        }
+    }
+
+    public class SchnorrReceiver
+    {
+        private readonly int _t;
+
+        public SchnorrReceiver(int t)
+        {
+            _t = t;
+        }
+
+        public int e { get; private set; }
+
+        public void GenerateE()
+        {
+            e = new Random().Next(0, (int) (Math.Pow(2, _t) - 1));
+        }
+
+        public bool Check(int s, BigInteger r, int p, int g, int y)
+        {
+            return r == BigInteger.Pow(g, s) * BigInteger.Pow(y, e) % p;
+        }
+    }
+}

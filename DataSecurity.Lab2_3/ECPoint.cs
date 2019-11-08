@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataSecurity.Lab2_3
 {
-    class ECPoint
+    internal class ECPoint
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int A { get; }
-        public int B { get; }
-        public int N { get; }
-        public int Q { get; }
-
         public ECPoint(int x, int y, int a, int b, int n, int q)
         {
             X = x;
@@ -23,6 +14,13 @@ namespace DataSecurity.Lab2_3
             N = n;
             Q = q;
         }
+
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int A { get; }
+        public int B { get; }
+        public int N { get; }
+        public int Q { get; }
 
         public static ECPoint operator +(ECPoint p1, ECPoint p2)
         {
@@ -41,13 +39,11 @@ namespace DataSecurity.Lab2_3
             var lambda = 0;
 
             if (p1.X == p2.X)
-            {
-                while ((2 * p1.Y * lambda).Mod(p1.N) != (3 * p1.X * p1.X + p1.A).Mod(p1.N)) lambda++;
-            }
+                while ((2 * p1.Y * lambda).Mod(p1.N) != (3 * p1.X * p1.X + p1.A).Mod(p1.N))
+                    lambda++;
             else
-            {
-                while ((lambda * (p2.X - p1.X)).Mod(p1.N) != (p2.Y - p1.Y).Mod(p1.N)) lambda++;
-            }
+                while ((lambda * (p2.X - p1.X)).Mod(p1.N) != (p2.Y - p1.Y).Mod(p1.N))
+                    lambda++;
 
             return lambda;
         }
