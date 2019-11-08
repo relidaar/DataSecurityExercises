@@ -5,7 +5,7 @@ using System.Text;
 using DataSecurity.Extensions;
 using DataSecurity.Interfaces;
 
-namespace DataSecurity.Implementations.Lab1_1
+namespace DataSecurity.Lab1_1
 {
     internal class HomophonicEncoder : IEncoder
     {
