@@ -9,15 +9,14 @@ namespace DataSecurity.Lab2_3
 {
     public class RsaSender
     {
-        public int E;
-        public int N;
-        public BigInteger S;
+        private readonly int _lowerBound;
+        private readonly int _upperBound;
 
         private int _d;
         private BigInteger _h = 19229;
-
-        private readonly int _lowerBound;
-        private readonly int _upperBound;
+        public int E;
+        public int N;
+        public BigInteger S;
 
         public RsaSender(int lowerBound, int upperBound)
         {
@@ -30,11 +29,14 @@ namespace DataSecurity.Lab2_3
             using (var md5 = MD5.Create())
             {
                 var hash = md5.ComputeHash(Encoding.ASCII.GetBytes(input));
-                _h = new BigInteger(hash.Concat(new byte[] { 0 }).ToArray());
+                _h = new BigInteger(hash.Concat(new byte[] {0}).ToArray());
             }
         }
 
-        public BigInteger CalculateS() => S = BigInteger.Pow(_h, _d) % N;
+        public BigInteger CalculateS()
+        {
+            return S = BigInteger.Pow(_h, _d) % N;
+        }
 
         public void GenerateKeys()
         {
@@ -43,14 +45,14 @@ namespace DataSecurity.Lab2_3
 
             N = p * q;
 
-            int m = (p - 1) * (q - 1);
+            var m = (p - 1) * (q - 1);
             E = GetE(m);
             _d = GetD(m);
         }
 
         private int GetD(int m)
         {
-            int value = 0;
+            var value = 0;
             while (value * E % m != 1) value++;
 
             return value;
@@ -59,7 +61,7 @@ namespace DataSecurity.Lab2_3
         private int GetE(int m)
         {
             var rnd = new Random();
-            int value = rnd.Next(_lowerBound, _upperBound);
+            var value = rnd.Next(_lowerBound, _upperBound);
             while (MathExtensions.GetNod(value, m) != 1) value = rnd.Next(_lowerBound, _upperBound);
 
             return value;
@@ -75,10 +77,13 @@ namespace DataSecurity.Lab2_3
             using (var md5 = MD5.Create())
             {
                 var hash = md5.ComputeHash(Encoding.ASCII.GetBytes(input));
-                _h = new BigInteger(hash.Concat(new byte[] { 0 }).ToArray());
+                _h = new BigInteger(hash.Concat(new byte[] {0}).ToArray());
             }
         }
 
-        public bool Check(BigInteger s, int e, int n) => _h == BigInteger.Pow(s, e) % n;
+        public bool Check(BigInteger s, int e, int n)
+        {
+            return _h == BigInteger.Pow(s, e) % n;
+        }
     }
 }

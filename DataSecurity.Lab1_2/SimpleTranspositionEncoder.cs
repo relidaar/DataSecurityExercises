@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
-    class SimpleTranspositionEncoder : IEncoder
+    internal class SimpleTranspositionEncoder : IEncoder
     {
         private int[] _key;
 
@@ -29,7 +29,7 @@ namespace DataSecurity.Lab1_2
             if (string.IsNullOrEmpty(encryptedMessage)) return null;
 
             var result = new StringBuilder();
-            for (int i = 0; i < encryptedMessage.Length; i++)
+            for (var i = 0; i < encryptedMessage.Length; i++)
             {
                 var index = Array.IndexOf(_key, i);
                 result.Append(encryptedMessage[index]);
@@ -45,9 +45,9 @@ namespace DataSecurity.Lab1_2
             var rnd = new Random();
 
             // Generate random positions
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
-                int pos = rnd.Next(0, n);
+                var pos = rnd.Next(0, n);
                 while (used.Contains(pos)) pos = rnd.Next(0, n);
 
                 yield return pos;

@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_3
 {
-    class XorEncoder : IEncoder
+    internal class XorEncoder : IEncoder
     {
         private readonly int[] _gamma;
 
@@ -21,7 +21,7 @@ namespace DataSecurity.Lab1_3
         {
             if (message == null) throw new NullReferenceException();
 
-            int gammaIndex = 0;
+            var gammaIndex = 0;
 
             var result = new StringBuilder();
             foreach (var symbol in message)
@@ -41,7 +41,7 @@ namespace DataSecurity.Lab1_3
         {
             if (encryptedMessage == null) throw new NullReferenceException();
 
-            int gammaIndex = 0;
+            var gammaIndex = 0;
 
             var result = new StringBuilder();
             foreach (var encryptedBinary in encryptedMessage.Split(' '))
@@ -59,7 +59,7 @@ namespace DataSecurity.Lab1_3
         private static string EncryptBinary(string input, string gamma)
         {
             var result = new StringBuilder();
-            for (int i = 0; i < 8; i++)
+            for (var i = 0; i < 8; i++)
             {
                 if (input[i] == '0' && gamma[i] == '0' ||
                     input[i] == '1' && gamma[i] == '1')
@@ -77,7 +77,7 @@ namespace DataSecurity.Lab1_3
         {
             if (number == 0) return "";
 
-            int remainder = number % 2;
+            var remainder = number % 2;
             number /= 2;
 
             return GetBinary(number) + remainder;
@@ -87,7 +87,7 @@ namespace DataSecurity.Lab1_3
         {
             var used = new List<int>();
             var rnd = new Random();
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 var number = rnd.Next(33, 126);
                 while (used.Contains(number)) number = rnd.Next(33, 126);

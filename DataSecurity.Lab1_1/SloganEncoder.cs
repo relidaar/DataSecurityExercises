@@ -8,8 +8,8 @@ namespace DataSecurity.Lab1_1
 {
     internal class SloganEncoder : IEncoder
     {
-        private readonly string _key;
         private readonly string _characters;
+        private readonly string _key;
 
         public SloganEncoder(string keyword)
         {

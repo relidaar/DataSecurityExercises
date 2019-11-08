@@ -6,10 +6,10 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_3
 {
-    class GammaEncoder : IEncoder
+    internal class GammaEncoder : IEncoder
     {
-        private readonly int[] _gamma;
         private readonly string _characters;
+        private readonly int[] _gamma;
 
         public GammaEncoder(int gammaCount)
         {
@@ -18,7 +18,7 @@ namespace DataSecurity.Lab1_3
             _gamma = GenerateGamma(gammaCount).ToArray();
 
             var characters = new StringBuilder();
-            for (int i = 0; i < 94; i++) characters.Append((char) (i + 32));
+            for (var i = 0; i < 94; i++) characters.Append((char) (i + 32));
 
             _characters = characters.ToString();
         }
@@ -27,12 +27,12 @@ namespace DataSecurity.Lab1_3
         {
             if (message == null) throw new NullReferenceException();
 
-            int gammaIndex = 0;
+            var gammaIndex = 0;
 
             var result = new StringBuilder();
             foreach (var symbol in message)
             {
-                int index = Mod(_characters.IndexOf(symbol) + _gamma[gammaIndex], _characters.Length);
+                var index = Mod(_characters.IndexOf(symbol) + _gamma[gammaIndex], _characters.Length);
 
                 result.Append(_characters[index]);
                 gammaIndex++;
@@ -47,12 +47,12 @@ namespace DataSecurity.Lab1_3
         {
             if (encryptedMessage == null) throw new NullReferenceException();
 
-            int gammaIndex = 0;
+            var gammaIndex = 0;
 
             var result = new StringBuilder();
             foreach (var symbol in encryptedMessage)
             {
-                int index = Mod(_characters.IndexOf(symbol) + _characters.Length - _gamma[gammaIndex], 
+                var index = Mod(_characters.IndexOf(symbol) + _characters.Length - _gamma[gammaIndex],
                     _characters.Length);
 
                 result.Append(_characters[index]);
@@ -68,7 +68,7 @@ namespace DataSecurity.Lab1_3
         {
             var used = new List<int>();
             var rnd = new Random();
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 var number = rnd.Next(0, 94);
                 while (used.Contains(number)) number = rnd.Next(0, 94);
@@ -78,6 +78,9 @@ namespace DataSecurity.Lab1_3
             }
         }
 
-        private static int Mod(int x, int m) => (x % m + m) % m;
+        private static int Mod(int x, int m)
+        {
+            return (x % m + m) % m;
+        }
     }
 }

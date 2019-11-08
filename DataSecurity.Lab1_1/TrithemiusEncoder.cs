@@ -55,6 +55,9 @@ namespace DataSecurity.Lab1_1
             return result.ToString();
         }
 
-        private int GetShift(int p) => _a * p * p + _b * p + _c;
+        private int GetShift(int p)
+        {
+            return _a * p * p + _b * p + _c;
+        }
     }
 }

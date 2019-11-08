@@ -8,8 +8,8 @@ namespace DataSecurity.Lab1_1
 {
     internal class VigenereEncoder : IEncoder
     {
-        private readonly string _keyword;
         private readonly string _characters;
+        private readonly string _keyword;
 
         public VigenereEncoder(string keyword)
         {

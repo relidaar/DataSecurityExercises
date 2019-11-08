@@ -8,8 +8,8 @@ namespace DataSecurity.Lab1_1
 {
     internal class PolybiusEncoder : IEncoder
     {
-        private readonly char[,] _matrix;
         private readonly string _characters;
+        private readonly char[,] _matrix;
 
         public PolybiusEncoder(string keyword)
         {

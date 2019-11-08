@@ -4,10 +4,10 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
-    class RouteEncoder : IEncoder
+    internal class RouteEncoder : IEncoder
     {
-        private readonly int _numberOfColumns;
         private const char Placeholder = '*';
+        private readonly int _numberOfColumns;
 
         public RouteEncoder(int numberOfColumns)
         {
@@ -23,19 +23,15 @@ namespace DataSecurity.Lab1_2
             message = message.Replace(" ", "");
             while (message.Length % _numberOfColumns != 0) message += Placeholder;
 
-            int n = message.Length / _numberOfColumns;
-            int m = _numberOfColumns;
+            var n = message.Length / _numberOfColumns;
+            var m = _numberOfColumns;
 
             var matrix = CreateMatrix(message, n, m);
 
             var result = new StringBuilder();
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    result.Append(matrix[j, i]);
-                }
-            }
+            for (var i = 0; i < m; i++)
+            for (var j = 0; j < n; j++)
+                result.Append(matrix[j, i]);
 
             return result.ToString();
         }
@@ -44,19 +40,15 @@ namespace DataSecurity.Lab1_2
         {
             if (encryptedMessage == null) throw new NullReferenceException();
 
-            int n = encryptedMessage.Length / _numberOfColumns;
-            int m = _numberOfColumns;
+            var n = encryptedMessage.Length / _numberOfColumns;
+            var m = _numberOfColumns;
 
             var matrix = CreateMatrix(encryptedMessage, n, m, true);
 
             var result = new StringBuilder();
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    result.Append(matrix[i, j]);
-                }
-            }
+            for (var i = 0; i < n; i++)
+            for (var j = 0; j < m; j++)
+                result.Append(matrix[i, j]);
 
             return result.ToString().Trim(Placeholder);
         }
@@ -65,29 +57,21 @@ namespace DataSecurity.Lab1_2
         {
             var matrix = new char[n, m];
 
-            int index = 0;
+            var index = 0;
             if (transposed)
-            {
-                for (int i = 0; i < m; i++)
+                for (var i = 0; i < m; i++)
+                for (var j = 0; j < n; j++)
                 {
-                    for (int j = 0; j < n; j++)
-                    {
-                        matrix[j, i] = input[index];
-                        index++;
-                    }
+                    matrix[j, i] = input[index];
+                    index++;
                 }
-            }
             else
-            {
-                for (int i = 0; i < n; i++)
+                for (var i = 0; i < n; i++)
+                for (var j = 0; j < m; j++)
                 {
-                    for (int j = 0; j < m; j++)
-                    {
-                        matrix[i, j] = input[index];
-                        index++;
-                    }
+                    matrix[i, j] = input[index];
+                    index++;
                 }
-            }
 
             return matrix;
         }

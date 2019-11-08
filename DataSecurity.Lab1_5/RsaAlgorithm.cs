@@ -8,19 +8,21 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_5
 {
-    class RsaAlgorithm : IEncoder
+    internal class RsaAlgorithm : IEncoder
     {
-        private int _e;
         private int _d;
-        private int _n;
+        private int _e;
         private int _m;
+        private int _n;
         private int _p;
         private int _q;
 
         public RsaAlgorithm(int lowerBound, int upperBound)
         {
-            if (lowerBound <= 0 || upperBound <= 0) throw new Exception("Lower or upper bound cannot be less than or equal to zero");
-            if (lowerBound >= upperBound) throw new Exception("Lower bound cannot be greater than or equal to upper bound");
+            if (lowerBound <= 0 || upperBound <= 0)
+                throw new Exception("Lower or upper bound cannot be less than or equal to zero");
+            if (lowerBound >= upperBound)
+                throw new Exception("Lower bound cannot be greater than or equal to upper bound");
 
             GenerateKey(lowerBound, upperBound);
         }
@@ -64,7 +66,7 @@ namespace DataSecurity.Lab1_5
         private int GetD(int lowerBound, int upperBound)
         {
             var rnd = new Random();
-            int d = rnd.Next(lowerBound, upperBound);
+            var d = rnd.Next(lowerBound, upperBound);
             while (MathExtensions.GetNod(d, _m) != 1) d = rnd.Next(lowerBound, upperBound);
 
             return d;
@@ -72,7 +74,7 @@ namespace DataSecurity.Lab1_5
 
         private int GetE(int lowerBound)
         {
-            int e = lowerBound;
+            var e = lowerBound;
             while (true)
             {
                 if (e * _d % _m == 1) break;

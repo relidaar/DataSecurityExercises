@@ -7,9 +7,8 @@ namespace DataSecurity.Lab1_2
 {
     public class MagicSquareEncoder : IEncoder
     {
-        private readonly int[,] _key = { { 16, 3, 2, 13 }, { 9, 6, 7, 12 }, { 5, 10, 11, 8 }, { 4, 15, 14, 1 } };
-
         private const char Placeholder = '*';
+        private readonly int[,] _key = {{16, 3, 2, 13}, {9, 6, 7, 12}, {5, 10, 11, 8}, {4, 15, 14, 1}};
 
         public string Encode(string message)
         {
@@ -24,13 +23,9 @@ namespace DataSecurity.Lab1_2
             foreach (var messageBlock in messageBlocks)
             {
                 var block = CreateEncryptedBlock(messageBlock);
-                for (int i = 0; i < 4; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        result.Append(block[i, j]);
-                    }
-                }
+                for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++)
+                    result.Append(block[i, j]);
             }
 
             return result.ToString();
@@ -46,13 +41,9 @@ namespace DataSecurity.Lab1_2
             foreach (var messageBlock in messageBlocks)
             {
                 var block = CreateEncryptedBlock(messageBlock);
-                for (int i = 0; i < 4; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        result.Append(block[i, j]);
-                    }
-                }
+                for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++)
+                    result.Append(block[i, j]);
             }
 
             return result.ToString().Trim(Placeholder);
@@ -61,20 +52,16 @@ namespace DataSecurity.Lab1_2
         private char[,] CreateEncryptedBlock(string messageBlock)
         {
             var block = new char[4, 4];
-            int index = 0;
+            var index = 0;
             while (index != messageBlock.Length)
-            {
-                for (int i = 0; i < 4; i++)
+                for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++)
                 {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        if (_key[i, j] != index + 1 || index == messageBlock.Length) continue;
+                    if (_key[i, j] != index + 1 || index == messageBlock.Length) continue;
 
-                        block[i, j] = messageBlock[index];
-                        index++;
-                    }
+                    block[i, j] = messageBlock[index];
+                    index++;
                 }
-            }
 
             return block;
         }
@@ -84,7 +71,7 @@ namespace DataSecurity.Lab1_2
             for (var i = 0; i < message.Length; i += n)
             {
                 var str = new StringBuilder();
-                for (int j = i; j < i + n; j++) str.Append(message[j]);
+                for (var j = i; j < i + n; j++) str.Append(message[j]);
 
                 yield return str.ToString();
             }

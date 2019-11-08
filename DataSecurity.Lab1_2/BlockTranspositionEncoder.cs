@@ -6,16 +6,16 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
-    class BlockTranspositionEncoder : IEncoder
+    internal class BlockTranspositionEncoder : IEncoder
     {
-        private List<int[]> _key;
         private readonly int _blockSize;
+        private List<int[]> _key;
 
-        private char _placeholder = '*';
+        private readonly char _placeholder = '*';
 
         public BlockTranspositionEncoder(int blockSize)
         {
-            if (blockSize <= 0) throw new Exception("Block size cannot be equal to or less than zero"); 
+            if (blockSize <= 0) throw new Exception("Block size cannot be equal to or less than zero");
 
             _blockSize = blockSize;
         }
@@ -32,10 +32,9 @@ namespace DataSecurity.Lab1_2
             var input = CreateMessageBlocks(message, _blockSize);
 
             var result = new StringBuilder();
-            foreach (var block in input.Zip(_key, (i, k) => new { Input = i, Key = k }))
-            {
-                foreach (var index in block.Key) result.Append(block.Input[index]);
-            }
+            foreach (var block in input.Zip(_key, (i, k) => new {Input = i, Key = k}))
+            foreach (var index in block.Key)
+                result.Append(block.Input[index]);
 
             return result.ToString();
         }
@@ -50,20 +49,18 @@ namespace DataSecurity.Lab1_2
 
             var result = new StringBuilder();
             foreach (var block in input.Zip(_key, (i, k) => new {Input = i, Key = k}))
-            {
-                for (int i = 0; i < _blockSize; i++)
+                for (var i = 0; i < _blockSize; i++)
                 {
                     var index = Array.IndexOf(block.Key, i);
                     result.Append(block.Input[index]);
                 }
-            }
 
             return result.ToString().Trim(_placeholder);
         }
 
         private static IEnumerable<int[]> CreateKey(int messageLength, int blockSize)
         {
-            for (int i = 0; i < messageLength / blockSize; i++)
+            for (var i = 0; i < messageLength / blockSize; i++)
             {
                 var block = new int[blockSize];
                 var used = new List<int>();
@@ -71,9 +68,9 @@ namespace DataSecurity.Lab1_2
                 var rnd = new Random();
 
                 // Generate random positions for each block
-                for (int j = 0; j < blockSize; j++)
+                for (var j = 0; j < blockSize; j++)
                 {
-                    int pos = rnd.Next(0, blockSize);
+                    var pos = rnd.Next(0, blockSize);
                     while (used.Contains(pos)) pos = rnd.Next(0, blockSize);
 
                     block[j] = pos;
@@ -86,10 +83,10 @@ namespace DataSecurity.Lab1_2
 
         private static IEnumerable<string> CreateMessageBlocks(string message, int size)
         {
-            for (var i = 0; i < message.Length; i+=size)
+            for (var i = 0; i < message.Length; i += size)
             {
                 var str = new StringBuilder();
-                for (int j = i; j < i+size; j++) str.Append(message[j]);
+                for (var j = i; j < i + size; j++) str.Append(message[j]);
 
                 yield return str.ToString();
             }

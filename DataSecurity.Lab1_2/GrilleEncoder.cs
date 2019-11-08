@@ -6,19 +6,24 @@ using static System.String;
 
 namespace DataSecurity.Lab1_2
 {
-    class GrilleEncoder : IEncoder
+    internal class GrilleEncoder : IEncoder
     {
-        private readonly int[,] _indices;
-
         private const char Placeholder = '*';
 
-        private static readonly int[,] BaseGrille = {
-            { 1, 2, 3, 1 },
-            { 3, 4, 4, 2 },
-            { 2, 4, 4, 3 },
-            { 1, 3, 2, 1 } };
+        private static readonly int[,] BaseGrille =
+        {
+            {1, 2, 3, 1},
+            {3, 4, 4, 2},
+            {2, 4, 4, 3},
+            {1, 3, 2, 1}
+        };
 
-        public GrilleEncoder() => _indices = GetRotatingIndexes();
+        private readonly int[,] _indices;
+
+        public GrilleEncoder()
+        {
+            _indices = GetRotatingIndexes();
+        }
 
         public string Encode(string message)
         {
@@ -32,9 +37,9 @@ namespace DataSecurity.Lab1_2
             var target = new char[4, 4];
             while (!IsNullOrEmpty(message))
             {
-                for (int n = 0; n < 4; n++)
+                for (var n = 0; n < 4; n++)
                 {
-                    for (int i = 0; i < 4; i++)
+                    for (var i = 0; i < 4; i++)
                     {
                         target[_indices[i, 0], _indices[i, 1]] = message.First();
                         message = message.Remove(0, 1);
@@ -54,26 +59,21 @@ namespace DataSecurity.Lab1_2
             if (encryptedMessage == null) throw new NullReferenceException();
 
             var result = new StringBuilder();
-            
+
             while (!IsNullOrEmpty(encryptedMessage))
             {
                 var original = new char[4, 4];
 
-                for (int i = 0; i < 4; i++)
+                for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++)
                 {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        original[i, j] = encryptedMessage.First();
-                        encryptedMessage = encryptedMessage.Remove(0, 1);
-                    }
+                    original[i, j] = encryptedMessage.First();
+                    encryptedMessage = encryptedMessage.Remove(0, 1);
                 }
 
-                for (int n = 0; n < 4; n++)
+                for (var n = 0; n < 4; n++)
                 {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        result.Append(original[_indices[i, 0], _indices[i, 1]]);
-                    }
+                    for (var i = 0; i < 4; i++) result.Append(original[_indices[i, 0], _indices[i, 1]]);
 
                     original = RotateRight(original);
                 }
@@ -88,8 +88,7 @@ namespace DataSecurity.Lab1_2
             var matrix = BaseGrille;
 
             var r = new Random();
-            for (int i = 0; i < 4; i++)
-            {
+            for (var i = 0; i < 4; i++)
                 while (true)
                 {
                     var x = r.Next(0, 4 - 1);
@@ -101,26 +100,20 @@ namespace DataSecurity.Lab1_2
                     indexes[i, 1] = y;
                     break;
                 }
-            }
 
             return indexes;
         }
 
         private static char[,] RotateRight(char[,] matrix)
         {
-            int max = matrix.GetLength(0);
+            var max = matrix.GetLength(0);
             var arr = new char[max, max];
 
-            for (int i = 0; i < max; i++)
-            {
-                for (int j = 0; j < max; j++)
-                {
-                    arr[j, max - i - 1] = matrix[i, j];
-                }
-            }
+            for (var i = 0; i < max; i++)
+            for (var j = 0; j < max; j++)
+                arr[j, max - i - 1] = matrix[i, j];
 
             return arr;
         }
     }
 }
-    

@@ -8,8 +8,8 @@ namespace DataSecurity.Lab1_1
 {
     internal class CaesarEncoder : IEncoder
     {
-        private readonly int _shift;
         private readonly string _characters;
+        private readonly int _shift;
 
         public CaesarEncoder(int shift)
         {

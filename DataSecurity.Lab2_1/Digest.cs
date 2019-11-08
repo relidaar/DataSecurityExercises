@@ -17,13 +17,15 @@ namespace DataSecurity.Lab2_1
             D = d;
         }
 
-        public static Digest operator +(Digest d1, Digest d2) =>
-            new Digest
+        public static Digest operator +(Digest d1, Digest d2)
+        {
+            return new Digest
             {
                 A = (uint) ((d1.A + d2.A) % Math.Pow(2, 32)),
                 B = (uint) ((d1.B + d2.B) % Math.Pow(2, 32)),
                 C = (uint) ((d1.C + d2.C) % Math.Pow(2, 32)),
-                D = (uint) ((d1.D + d2.D) % Math.Pow(2, 32)),
+                D = (uint) ((d1.D + d2.D) % Math.Pow(2, 32))
             };
+        }
     }
 }

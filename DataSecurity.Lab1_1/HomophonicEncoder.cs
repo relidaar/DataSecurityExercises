@@ -9,9 +9,9 @@ namespace DataSecurity.Lab1_1
 {
     internal class HomophonicEncoder : IEncoder
     {
+        private readonly string _characters;
         private readonly int[] _frequencies;
         private readonly IList<int[]> _key;
-        private readonly string _characters;
 
         public HomophonicEncoder(int[] frequencies)
         {

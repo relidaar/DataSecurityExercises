@@ -8,13 +8,13 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_5
 {
-    class KnapsackAlgorithm : IEncoder
+    internal class KnapsackAlgorithm : IEncoder
     {
-        private int[] _privateKey;
-        private int[] _publicKey;
         private int _m;
         private int _n;
         private int _n1;
+        private int[] _privateKey;
+        private int[] _publicKey;
 
         public KnapsackAlgorithm(int keyLength)
         {
@@ -30,7 +30,7 @@ namespace DataSecurity.Lab1_5
             var binaryBlocks = message.Select(symbol => ((int) symbol).GetBinary().PadLeft(10, '0')).ToList();
 
             var result = new List<BigInteger>();
-            foreach (var block in binaryBlocks) 
+            foreach (var block in binaryBlocks)
                 result.Add(block.Select((b, i) => (b - '0') * _publicKey[i]).Sum());
 
             return string.Join(" ", result).Trim();
@@ -49,7 +49,6 @@ namespace DataSecurity.Lab1_5
                 var sum = value;
                 var binary = new StringBuilder();
                 foreach (var x in _privateKey.Reverse())
-                {
                     if (x <= sum)
                     {
                         sum -= x;
@@ -59,10 +58,9 @@ namespace DataSecurity.Lab1_5
                     {
                         binary.Append('0');
                     }
-                }
 
                 var binaryReversed = new string(binary.ToString().Reverse().ToArray());
-                result.Append((char)Convert.ToInt32(binaryReversed, 2));
+                result.Append((char) Convert.ToInt32(binaryReversed, 2));
             }
 
             return result.ToString();

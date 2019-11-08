@@ -6,7 +6,7 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
-    class VerticalTranspositionEncoder : IEncoder
+    internal class VerticalTranspositionEncoder : IEncoder
     {
         private const char Placeholder = '*';
         private readonly int[] _key;
@@ -28,28 +28,22 @@ namespace DataSecurity.Lab1_2
             message = message.Replace(" ", "");
             while (message.Length % _key.Length != 0) message += Placeholder;
 
-            int n = message.Length / _key.Length;
-            int m = _key.Length;
+            var n = message.Length / _key.Length;
+            var m = _key.Length;
 
             var matrix = new char[n, m];
-            int index = 0;
-            for (int i = 0; i < n; i++)
+            var index = 0;
+            for (var i = 0; i < n; i++)
+            for (var j = 0; j < m; j++)
             {
-                for (int j = 0; j < m; j++)
-                {
-                    matrix[i, j] = message[index];
-                    index++;
-                }
+                matrix[i, j] = message[index];
+                index++;
             }
 
             var result = new StringBuilder();
             foreach (var i in _key)
-            {
-                for (int j = 0; j < n; j++)
-                {
+                for (var j = 0; j < n; j++)
                     result.Append(matrix[j, i]);
-                }
-            }
 
             return result.ToString();
         }
@@ -58,28 +52,22 @@ namespace DataSecurity.Lab1_2
         {
             if (encryptedMessage == null) throw new NullReferenceException();
 
-            int n = encryptedMessage.Length / _key.Length;
-            int m = _key.Length;
+            var n = encryptedMessage.Length / _key.Length;
+            var m = _key.Length;
 
             var matrix = new char[n, m];
-            int index = 0;
+            var index = 0;
             foreach (var i in _key)
-            {
-                for (int j = 0; j < n; j++)
+                for (var j = 0; j < n; j++)
                 {
                     matrix[j, i] = encryptedMessage[index];
                     index++;
                 }
-            }
 
             var result = new StringBuilder();
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    result.Append(matrix[i, j]);
-                }
-            }
+            for (var i = 0; i < n; i++)
+            for (var j = 0; j < m; j++)
+                result.Append(matrix[i, j]);
 
             return result.ToString().Trim(Placeholder);
         }

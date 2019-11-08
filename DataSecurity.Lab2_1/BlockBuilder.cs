@@ -9,7 +9,10 @@ namespace DataSecurity.Lab2_1
     {
         private readonly string _input;
 
-        public BlockBuilder(string input) => _input = input;
+        public BlockBuilder(string input)
+        {
+            _input = input;
+        }
 
         public string[] GetBlocks()
         {
@@ -26,7 +29,7 @@ namespace DataSecurity.Lab2_1
             var blocks = new List<string>();
             var text = normalizedInput.ToString();
 
-            for (int i = 0; i < normalizedInput.Length; i+=512) 
+            for (var i = 0; i < normalizedInput.Length; i += 512)
                 blocks.Add(text.Substring(i, 512));
 
             return blocks.ToArray();

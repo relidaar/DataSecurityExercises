@@ -8,10 +8,10 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_5
 {
-    class ElGamalAlgorithm : IEncoder
+    internal class ElGamalAlgorithm : IEncoder
     {
-        private int _p;
         private int _g;
+        private int _p;
         private int _x;
         private BigInteger _y;
 
@@ -30,7 +30,7 @@ namespace DataSecurity.Lab1_5
             var b = new List<BigInteger>();
             foreach (var c in message)
             {
-                int k = new Random().Next(2, _p - 1);
+                var k = new Random().Next(2, _p - 1);
                 a.Add(BigInteger.Pow(_g, k) % _p);
                 b.Add(BigInteger.Pow(_y, k) * c % _p);
             }
@@ -45,13 +45,13 @@ namespace DataSecurity.Lab1_5
             var temp = encryptedMessage.Split(" @@@ ");
             var listA = temp[0].Split(" ");
             var listB = temp[1].Split(" ");
-            var encrypted = listA.Zip(listB, (a, b) => new { A = BigInteger.Parse(a), B = BigInteger.Parse(b)});
-       
+            var encrypted = listA.Zip(listB, (a, b) => new {A = BigInteger.Parse(a), B = BigInteger.Parse(b)});
+
             var result = new StringBuilder();
             foreach (var pair in encrypted)
             {
                 var index = pair.B * BigInteger.Pow(pair.A, _p - 1 - _x) % _p;
-                result.Append((char)index);
+                result.Append((char) index);
             }
 
             return result.ToString();
@@ -67,7 +67,7 @@ namespace DataSecurity.Lab1_5
 
         private int GetG()
         {
-            int g = 2;
+            var g = 2;
             while (!IsPrimitive(g)) g++;
 
             return g;
@@ -75,10 +75,9 @@ namespace DataSecurity.Lab1_5
 
         private bool IsPrimitive(int g)
         {
-            for (int i = 1; i < _p - 1; i++)
-            {
-                if (BigInteger.Pow(g, i) % _p == 1) return false;
-            }
+            for (var i = 1; i < _p - 1; i++)
+                if (BigInteger.Pow(g, i) % _p == 1)
+                    return false;
 
             return true;
         }

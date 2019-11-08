@@ -6,25 +6,25 @@ namespace DataSecurity.Lab2_2
 {
     public class SchnorrSender
     {
-        public int p { get; private set; }
-        private int _q;
-
-        public int g { get; private set; }
-        public int y { get; private set; }
-        private int _x;
-
-        public BigInteger r { get; private set; }
-        public int s { get; private set; }
-        private int _k = 19299;
-
         private readonly int _lowerBound;
         private readonly int _upperBound;
+        private int _k = 19299;
+        private int _q;
+        private int _x;
 
         public SchnorrSender(int lowerBound, int upperBound)
         {
             _lowerBound = lowerBound;
             _upperBound = upperBound;
         }
+
+        public int p { get; private set; }
+
+        public int g { get; private set; }
+        public int y { get; private set; }
+
+        public BigInteger r { get; private set; }
+        public int s { get; private set; }
 
         public void GenerateKeys()
         {
@@ -45,7 +45,7 @@ namespace DataSecurity.Lab2_2
 
         private int GetG()
         {
-            int value = new Random().Next(0, 10);
+            var value = new Random().Next(0, 10);
             while (BigInteger.Pow(value, _q) % p != 1) value++;
 
             return value;
@@ -53,30 +53,47 @@ namespace DataSecurity.Lab2_2
 
         private int GetY()
         {
-            int value = 1;
+            var value = 1;
             while (BigInteger.Pow(g, _x) * value % p != 1) value++;
 
             return value;
         }
 
-        public void GenerateK() => _k = new Random().Next(1, _q);
+        public void GenerateK()
+        {
+            _k = new Random().Next(1, _q);
+        }
 
-        public void CalculateR() => r = BigInteger.Pow(g, _k) % p;
+        public void CalculateR()
+        {
+            r = BigInteger.Pow(g, _k) % p;
+        }
 
-        public void CalculateS(int e) => s = (_k + _x * e) % _q;
+        public void CalculateS(int e)
+        {
+            s = (_k + _x * e) % _q;
+        }
     }
 
     public class SchnorrReceiver
     {
-        public int e { get; private set; }
-
         private readonly int _t;
 
-        public SchnorrReceiver(int t) => _t = t;
+        public SchnorrReceiver(int t)
+        {
+            _t = t;
+        }
 
-        public void GenerateE() => e = new Random().Next(0, (int)(Math.Pow(2, _t) - 1));
+        public int e { get; private set; }
 
-        public bool Check(int s, BigInteger r, int p, int g, int y) => 
-            r == BigInteger.Pow(g, s) * BigInteger.Pow(y, e) % p;
+        public void GenerateE()
+        {
+            e = new Random().Next(0, (int) (Math.Pow(2, _t) - 1));
+        }
+
+        public bool Check(int s, BigInteger r, int p, int g, int y)
+        {
+            return r == BigInteger.Pow(g, s) * BigInteger.Pow(y, e) % p;
+        }
     }
 }

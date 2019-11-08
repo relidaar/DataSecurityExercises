@@ -4,22 +4,22 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab2_1
 {
-    class HashMd5 : IEncoder
+    internal class HashMd5 : IEncoder
     {
-        private readonly List<int[]> _s = new List<int[]>
-        {
-            new[]{ 7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22 },
-            new[]{ 5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20 },
-            new[]{ 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23 },
-            new[]{ 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21 }
-        };
-
         private readonly List<Func<uint, uint, uint, uint>> _functions = new List<Func<uint, uint, uint, uint>>
         {
             (x, y, z) => (x & y) | (~x & z),
             (x, y, z) => (x & z) | (~z & y),
             (x, y, z) => x ^ y ^ z,
             (x, y, z) => y ^ (~z | x)
+        };
+
+        private readonly List<int[]> _s = new List<int[]>
+        {
+            new[] {7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22},
+            new[] {5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20},
+            new[] {4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23},
+            new[] {6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21}
         };
 
         public string Encode(string input)
@@ -47,18 +47,18 @@ namespace DataSecurity.Lab2_1
         private Digest RunRound(Func<uint, uint, uint, uint> func, Digest digest, string block, int round)
         {
             var s = _s[round];
-            int j = 0;
-            for (int i = 0; i < block.Length; i+=32, j++)
+            var j = 0;
+            for (var i = 0; i < block.Length; i += 32, j++)
             {
                 var k = (uint) (Math.Pow(2, 32) * Math.Abs(Math.Sin(j + 16 * round)));
                 var result = func(digest.B, digest.C, digest.D);
                 var t = Convert.ToUInt32(block.Substring(i, 32), 2);
-                
+
                 digest.A = (uint) ((digest.A + result) % Math.Pow(2, 32));
                 digest.A = (uint) ((digest.A + t) % Math.Pow(2, 32));
                 digest.A = (uint) ((digest.A + k) % Math.Pow(2, 32));
                 digest.A = RotLeft(digest.A, s[j]);
-                digest.A = (uint)((digest.A + digest.B) % Math.Pow(2, 32));
+                digest.A = (uint) ((digest.A + digest.B) % Math.Pow(2, 32));
 
                 var temp = digest.D;
                 digest.D = digest.C;

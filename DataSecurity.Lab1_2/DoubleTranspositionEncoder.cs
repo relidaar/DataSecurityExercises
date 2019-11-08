@@ -6,13 +6,13 @@ using DataSecurity.Interfaces;
 
 namespace DataSecurity.Lab1_2
 {
-    class DoubleTranspositionEncoder : IEncoder
+    internal class DoubleTranspositionEncoder : IEncoder
     {
+        private const char Placeholder = '*';
         private readonly int _numberOfColumns;
+        private int[] _columns;
 
         private int[] _rows;
-        private int[] _columns;
-        private const char Placeholder = '*';
 
         public DoubleTranspositionEncoder(int numberOfColumns)
         {
@@ -28,8 +28,8 @@ namespace DataSecurity.Lab1_2
             message = message.Replace(" ", "");
             while (message.Length % _numberOfColumns != 0) message += Placeholder;
 
-            int n = message.Length / _numberOfColumns;
-            int m = _numberOfColumns;
+            var n = message.Length / _numberOfColumns;
+            var m = _numberOfColumns;
 
             _rows = GeneratePermutations(n).ToArray();
             _columns = GeneratePermutations(m).ToArray();
@@ -39,13 +39,9 @@ namespace DataSecurity.Lab1_2
             matrix = DoPermutations(matrix, n, m);
 
             var result = new StringBuilder();
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    result.Append(matrix[j, i]);
-                }
-            }
+            for (var i = 0; i < m; i++)
+            for (var j = 0; j < n; j++)
+                result.Append(matrix[j, i]);
 
             return result.ToString();
         }
@@ -54,21 +50,17 @@ namespace DataSecurity.Lab1_2
         {
             if (encryptedMessage == null) throw new NullReferenceException();
 
-            int n = encryptedMessage.Length / _numberOfColumns;
-            int m = _numberOfColumns;
+            var n = encryptedMessage.Length / _numberOfColumns;
+            var m = _numberOfColumns;
 
             var matrix = CreateMatrix(encryptedMessage, n, m, true);
 
             var transposed = DoReversePermutations(matrix, n, m);
 
             var result = new StringBuilder();
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    result.Append(transposed[i, j]);
-                }
-            }
+            for (var i = 0; i < n; i++)
+            for (var j = 0; j < m; j++)
+                result.Append(transposed[i, j]);
 
             return result.ToString().Trim(Placeholder);
         }
@@ -80,10 +72,7 @@ namespace DataSecurity.Lab1_2
             for (var i = 0; i < m; i++)
             {
                 var column = GetColumn(matrix, _columns[i]);
-                for (int j = 0; j < n; j++)
-                {
-                    result[j, i] = column[j];
-                }
+                for (var j = 0; j < n; j++) result[j, i] = column[j];
             }
 
             var temp = (char[,]) result.Clone();
@@ -91,10 +80,7 @@ namespace DataSecurity.Lab1_2
             for (var i = 0; i < _rows.Length; i++)
             {
                 var row = GetRow(temp, _rows[i]);
-                for (int j = 0; j < m; j++)
-                {
-                    result[i, j] = row[j];
-                }
+                for (var j = 0; j < m; j++) result[i, j] = row[j];
             }
 
             return result;
@@ -104,26 +90,20 @@ namespace DataSecurity.Lab1_2
         {
             var result = new char[n, m];
 
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 var index = Array.IndexOf(_rows, i);
                 var row = GetRow(matrix, index);
-                for (int j = 0; j < m; j++)
-                {
-                    result[i, j] = row[j];
-                }
+                for (var j = 0; j < m; j++) result[i, j] = row[j];
             }
 
-            var temp = (char[,])result.Clone();
+            var temp = (char[,]) result.Clone();
 
-            for (int i = 0; i < m; i++)
+            for (var i = 0; i < m; i++)
             {
                 var index = Array.IndexOf(_columns, i);
                 var column = GetColumn(temp, index);
-                for (int j = 0; j < n; j++)
-                {
-                    result[j, i] = column[j];
-                }
+                for (var j = 0; j < n; j++) result[j, i] = column[j];
             }
 
             return result;
@@ -145,31 +125,23 @@ namespace DataSecurity.Lab1_2
 
         private static char[,] CreateMatrix(string input, int n, int m, bool transposed = false)
         {
-            var matrix = new char[n,m];
+            var matrix = new char[n, m];
 
-            int index = 0;
+            var index = 0;
             if (transposed)
-            {
-                for (int i = 0; i < m; i++)
+                for (var i = 0; i < m; i++)
+                for (var j = 0; j < n; j++)
                 {
-                    for (int j = 0; j < n; j++)
-                    {
-                        matrix[j, i] = input[index];
-                        index++;
-                    }
+                    matrix[j, i] = input[index];
+                    index++;
                 }
-            }
             else
-            {
-                for (int i = 0; i < n; i++)
+                for (var i = 0; i < n; i++)
+                for (var j = 0; j < m; j++)
                 {
-                    for (int j = 0; j < m; j++)
-                    {
-                        matrix[i, j] = input[index];
-                        index++;
-                    }
+                    matrix[i, j] = input[index];
+                    index++;
                 }
-            }
 
             return matrix;
         }
@@ -179,9 +151,9 @@ namespace DataSecurity.Lab1_2
             var used = new List<int>();
 
             var rnd = new Random();
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
-                int num = rnd.Next(0, n);
+                var num = rnd.Next(0, n);
                 while (used.Contains(num)) num = rnd.Next(0, n);
 
                 yield return num;
