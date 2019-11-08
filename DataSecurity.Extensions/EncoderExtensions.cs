@@ -25,6 +25,17 @@ namespace DataSecurity.Extensions
             return GetBinary(value) + remainder;
         }
 
+        public static string GetBinary(this string data, int width = 8)
+        {
+            var result = new StringBuilder();
+            foreach (var c in data.ToCharArray())
+            {
+                result.Append(Convert.ToString(c, 2).PadLeft(width, '0'));
+            }
+
+            return result.ToString();
+        }
+
         public static string GetFractionalBinary(this double value)
         {
             if (value == 0) return "0";
