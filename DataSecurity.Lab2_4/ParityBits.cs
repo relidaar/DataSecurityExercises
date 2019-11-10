@@ -18,10 +18,11 @@ namespace DataSecurity.Lab2_4
             if (message == null) throw new NullReferenceException();
 
             var result = new StringBuilder();
-            foreach (var binary in message.GetBinary(8, " ").Split(' '))
-            {
-                int count = binary.Count(d => d == '1');
 
+            var binaries = message.Select(c => ((int) c).GetBinary().PadLeft(8, '0')).ToList();
+
+            foreach (var count in binaries.Select(binary => binary.Count(d => d == '1')))
+            {
                 char digit;
                 if (count % 2 == 0) digit = _isEven ? '0' : '1';
                 else digit = _isEven ? '1' : '0';
