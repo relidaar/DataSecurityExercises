@@ -50,5 +50,17 @@ namespace DataSecurity.Extensions
 
             return fractional.ToString();
         }
+
+        public static string Xor(this string a, string b)
+        {
+            var result = new StringBuilder();
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] == '1' && b[i] == '0' || a[i] == '0' && b[i] == '1') result.Append("1");
+                else result.Append('0');
+            }
+
+            return result.ToString();
+        }
     }
 }
