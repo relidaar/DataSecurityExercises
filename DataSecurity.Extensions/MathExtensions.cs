@@ -31,11 +31,10 @@ namespace DataSecurity.Extensions
 
         public static bool IsPrime(this int value)
         {
-            if (value % 1 == 0) return value == 2;
-
-            for (var i = 3; i <= Math.Sqrt(value); i += 2)
-                if (value % i == 0)
-                    return false;
+            for (var i = 2; i <= value / 2; i++)
+            {
+                if (value % i == 0) return false;
+            }
 
             return true;
         }
