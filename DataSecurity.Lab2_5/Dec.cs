@@ -31,6 +31,7 @@ namespace DataSecurity.Lab2_5
         public string Encode(string input)
         {
             var t = new string(_ip.Select(index => input[index-1]).ToArray());
+            Console.WriteLine($"IP: {t}\n");
 
             var h = t.Substring(0, 32);
             var l = t.Substring(32, 32);
